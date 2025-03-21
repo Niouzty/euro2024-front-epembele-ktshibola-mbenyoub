@@ -1,0 +1,51 @@
+<div class="container">
+  <h2>{{ titre }}</h2>
+
+  <!-- Barre de recherche -->
+  <input type="text" [(ngModel)]="input" placeholder="Rechercher..." (input)="finalValues" class="search-bar">
+
+  <!-- Liste de filtres à cocher -->
+  <div class="filters">
+
+    @for (trie of tries; track $index) {
+      <label>
+        <input
+          type="checkbox"
+          [checked]="trie_actif.includes(trie)"
+          (change)="toggleFiltre(trie)"
+        />
+        {{ trie }}
+      </label>
+    }
+  </div>
+
+  @if (finalValues.length > 0) {
+      <table class="tableau">
+          <thead>
+              <tr>
+                  @for (key of keys; track $index) {
+                      <th>{{ key }}</th>
+                  }
+              </tr>
+          </thead>
+          <tbody>
+            @for (value of finalValues; track $index) {
+              <tr>
+              @for (data of toString(value); track $index) {
+                <td>{{ data }}</td>
+              }
+              </tr>
+            }
+          </tbody>
+      </table>
+
+      <!-- Navigation -->
+      <div>
+          <button (click)="precedent()">Précédent</button>
+          <p>{{ pageActuelle }} / {{ pageMax }}</p>
+          <button (click)="suivant()">Suivant</button>
+      </div>
+  } @else {
+      <p class="empty-message">Aucun stade trouvé.</p>
+  }
+</div>

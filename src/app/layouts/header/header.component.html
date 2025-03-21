@@ -1,0 +1,7 @@
+<header>
+    <h1>EURO 2024</h1>
+
+    @for (link of links; track $index) {
+        <a [routerLink]="link.url">{{link.nom}}</a>
+    }
+</header>

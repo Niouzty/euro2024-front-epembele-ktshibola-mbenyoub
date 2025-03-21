@@ -1,0 +1,71 @@
+// Conteneur principal
+
+// Variables SCSS pour les couleurs et les styles
+$primary-color: #007bff;
+$primary-hover-color: #0056b3;
+$muted-color: #6c757d;
+$background-color: #0e5397; // Assurez-vous que cette ligne est présente
+$border-color: #026ad3;
+$shadow-color: rgba(0, 0, 0, 0.1);
+$hover-shadow-color: rgba(0, 0, 0, 0.15);
+$pk-underline-color: red;
+
+
+
+.table-container {
+    display: flex;
+    flex-wrap: wrap; // Permet le retour à la ligne si nécessaire
+    gap: 10px; // Espace entre les éléments
+    align-items: center; // Alignement vertical au centre
+}
+
+// Style de base pour tous les champs
+.column-field {
+    padding: 8px 15px;
+    border-radius: 5px;
+    background-color: $background-color;
+    color: white;
+    font-size: 1rem;
+    border: 1px solid $border-color;
+    box-shadow: 0 2px 4px $shadow-color;
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
+    display: inline-block;
+    margin: 5px;
+
+    // Style au survol
+    &:hover {
+        background-color: darken($background-color, 5%);
+        box-shadow: 0 4px 8px $hover-shadow-color;
+    }
+}
+
+// Style spécifique pour les PK (soulignement rouge)
+.pk-field {
+    text-decoration: underline;
+    text-decoration-color: $pk-underline-color;
+    text-decoration-thickness: 2px;
+}
+
+// Style pour les liens (FK)
+a.column-field {
+    color: $primary-color;
+    text-decoration: none;
+
+    // Style au survol pour les liens
+    &:hover {
+        text-decoration: underline;
+        color: $primary-hover-color;
+    }
+}
+
+
+// Conteneur principal
+.table-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    align-items: center;
+    font-size: 1.2rem; // Taille de police globale augmentée
+
+}
+

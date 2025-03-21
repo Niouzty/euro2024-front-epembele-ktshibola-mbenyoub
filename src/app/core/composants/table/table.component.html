@@ -1,0 +1,11 @@
+<div class="table-container">
+    <p>{{nom}} :</p>
+    (
+    @for (column of columns; track $index) {
+        <span [innerHTML]="createBalise(column)"></span>
+        @if (!$last) {
+            , 
+        }
+    }
+    )
+</div>
