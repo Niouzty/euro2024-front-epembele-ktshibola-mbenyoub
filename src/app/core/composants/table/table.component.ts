@@ -8,7 +8,7 @@ import { Columns } from '../../../Modeles/Columns';
 })
 export class TableComponent {
 
-  @Input({ required: true })
+  @Input({ required: false })
   nom!: string;
 
   @Input({ required: true })

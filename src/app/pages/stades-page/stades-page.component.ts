@@ -4,21 +4,27 @@ import { StadesService } from '../../Services/stades.service';
 import { Stade } from '../../Modeles/Stade';
 import { TableauDataComponent } from "../../core/composants/tableau-data/tableau-data.component";
 import { FormsModule } from '@angular/forms';
+import { TableComponent } from '../../core/composants/table/table.component';
+import { DatabaseService } from '../../Services/database.service';
+import { Columns } from '../../Modeles/Columns';
 
 @Component({
   selector: 'app-stades-page',
-  imports: [CommonModule, TableauDataComponent,FormsModule], 
+  imports: [CommonModule, TableauDataComponent,FormsModule,TableComponent], 
   templateUrl: './stades-page.component.html', 
   styleUrl: './stades-page.component.scss', 
 })
 export class StadesPageComponent implements OnInit {
+  constructor(private stadeService: StadesService,private bdservice: DatabaseService) {}
+
 
   titre: string = "Liste des Stades !";
   stades: Stade[] = [];
   taillePage: number = 10;
   nombreTotalStades: number = 0;
-  constructor(private stadeService: StadesService) {}
+  table: Columns[] = []
 
+  
 
   get fonctionTries(): Record<string, (values: Stade[]) => Stade[]>[] {
     return [
@@ -48,6 +54,8 @@ export class StadesPageComponent implements OnInit {
       }
 
     });
+
+    this.table = this.bdservice.table;
   }
 
 
