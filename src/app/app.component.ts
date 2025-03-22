@@ -10,7 +10,7 @@ import { TableauDataComponent } from "./core/composants/tableau-data/tableau-dat
 
 @Component({
   selector: 'app-root',
-  imports: [TableauDataComponent, StadesPageComponent],
+  imports: [TableauDataComponent, StadesPageComponent, HeaderComponent,RouterOutlet],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss'
 })

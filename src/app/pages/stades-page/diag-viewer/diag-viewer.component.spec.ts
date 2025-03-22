@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { HistoriqueMatchComponent } from './historique-match.component';
+import { DiagViewerComponent } from './diag-viewer.component';
 
-describe('HistoriqueMatchComponent', () => {
-  let component: HistoriqueMatchComponent;
-  let fixture: ComponentFixture<HistoriqueMatchComponent>;
+describe('DiagViewerComponent', () => {
+  let component: DiagViewerComponent;
+  let fixture: ComponentFixture<DiagViewerComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [HistoriqueMatchComponent]
+      imports: [DiagViewerComponent]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(HistoriqueMatchComponent);
+    fixture = TestBed.createComponent(DiagViewerComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

@@ -1,5 +1,5 @@
 <div class="table-container">
-    <p>{{nom}} :</p>
+    <ng-content></ng-content>
     (
     @for (column of columns; track $index) {
         <span [innerHTML]="createBalise(column)"></span>

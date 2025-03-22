@@ -1,0 +1,44 @@
+// Variables
+$primary-color: #004990; // Couleur principale (bleu européen)
+$secondary-color: #ffffff; // Couleur secondaire (blanc)
+$font-stack: 'Arial', sans-serif;
+$spacing-unit: 1rem;
+
+// Header styles
+header {
+  background-color: $primary-color;
+  padding: $spacing-unit;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+
+  h1 {
+    color: $secondary-color;
+    font-family: $font-stack;
+    margin: 0;
+    font-size: 2rem;
+    font-weight: bold;
+  }
+
+  // Navigation links
+  a {
+    color: $secondary-color;
+    text-decoration: none;
+    font-family: $font-stack;
+    margin-left: $spacing-unit;
+    padding: 0.5rem 1rem;
+    border-radius: 4px;
+    transition: background-color 0.3s ease;
+
+    &:hover {
+      background-color: darken($primary-color, 10%);
+    }
+
+    // Active link (if needed)
+    &.active {
+      background-color: darken($primary-color, 15%);
+      font-weight: bold;
+    }
+  }
+}

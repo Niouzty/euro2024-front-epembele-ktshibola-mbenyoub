@@ -7,10 +7,10 @@ import { Columns } from '../Modeles/Columns';
 
 export class DatabaseService {
   table = [
-    new Columns('id_user',true,true),
-    new Columns('prenom',true,false),
-    new Columns('age',false,true),
-    new Columns('adresse',false,false)
+    new Columns('Id_stade',true,false),
+    new Columns('capacité',true,false),
+    new Columns('ville',false,false),
+    new Columns('nom',false,false)
   ];
 
   constructor() { }

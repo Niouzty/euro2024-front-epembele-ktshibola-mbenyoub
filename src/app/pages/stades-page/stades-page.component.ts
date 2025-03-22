@@ -7,10 +7,11 @@ import { FormsModule } from '@angular/forms';
 import { TableComponent } from '../../core/composants/table/table.component';
 import { DatabaseService } from '../../Services/database.service';
 import { Columns } from '../../Modeles/Columns';
-
+import { DiagViewerComponent } from './diag-viewer/diag-viewer.component';
+import { NgxChartsModule } from '@swimlane/ngx-charts';
 @Component({
   selector: 'app-stades-page',
-  imports: [CommonModule, TableauDataComponent,FormsModule,TableComponent], 
+  imports: [CommonModule, TableauDataComponent,FormsModule,TableComponent,DiagViewerComponent], 
   templateUrl: './stades-page.component.html', 
   styleUrl: './stades-page.component.scss', 
 })
