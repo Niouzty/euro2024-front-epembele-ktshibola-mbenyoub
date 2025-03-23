@@ -23,8 +23,9 @@ export class StadesService {
     );
   }
 
-  getStatsVisiteur(id_stade : number) : Observable<{result : number[]}>
-  {
-    return this.http.get<{ result: number[] }>(this.url+id_stade+'statistique/visiteurs');
+ 
+
+  getAverageVisitorsByStade(): Observable<{ result : {stade: string, avg_visitor: number}[]}> {
+    return this.http.get<{ result : {stade: string, avg_visitor: number}[]}>(`${this.url}/visitors/lenght`);
   }
 }

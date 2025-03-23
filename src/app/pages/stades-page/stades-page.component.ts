@@ -62,14 +62,23 @@ export class StadesPageComponent implements OnInit {
 
   chargementPage(page: number)
   {
-    this.stadeService.getStades(page,this.taillePage).subscribe({
+    this.stadeService.getStades(page, this.taillePage).subscribe({
       next: (response) => {
-        this.stades = response.result;
+        if (response.result.length > 0) {
+          this.stades = response.result;
+        } else {
+          this.stades = [];
+        }
+    
+        console.log("ff");
+        console.log(this.stades);
       },
       error: (err) => {
         console.error('Erreur lors de la récupération des stades :', err);
       }
     });
+    
+    
   }
 
   onChangementDePage(page: number){
