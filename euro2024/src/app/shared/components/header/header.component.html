@@ -1,0 +1,100 @@
+<nav class="w-64 h-screen bg-white border-r border-gray-200 flex flex-col p-4 space-y-2">
+    <!-- Titre -->
+    <div class="text-2xl font-extrabold text-center mb-4">
+        <span class="text-blue-500">Euro</span>
+        <span class="text-gray-800">2024</span>
+    </div>
+
+    <ul class="flex-1 space-y-1">
+        <!-- Gestion des Données -->
+        <li class="relative group">
+            <button class="w-full flex items-center p-3 text-gray-800 hover:bg-gray-100 hover:text-blue-600 rounded transition-colors duration-300">
+                <span class="ml-3 text-sm font-semibold whitespace-nowrap">Gestion des Données</span>
+                <svg class="ml-2 w-4 h-4 transition-transform group-hover:rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+                </svg>
+            </button>
+            <ul class="absolute left-0 opacity-0 invisible transition-all duration-300 group-hover:opacity-100 group-hover:visible mt-2 space-y-2 bg-white text-black shadow-lg p-4 z-20 min-w-max">
+                <li><a href="#general-data" class="block hover:text-blue-600 py-1">Visualisation</a></li>
+                <li><a href="#add-entry" class="block hover:text-blue-600 py-1">Ajouter Entrée</a></li>
+                <li><a href="#edit-entry" class="block hover:text-blue-600 py-1">Modifier Entrée</a></li>
+                <li><a href="#delete-entry" class="block hover:text-blue-600 py-1">Supprimer Entrée</a></li>
+                <li><a href="#filter-data" class="block hover:text-blue-600 py-1">Filtrer les Données</a></li>
+                <li><a href="#sort-data" class="block hover:text-blue-600 py-1">Trier les Données</a></li>
+            </ul>
+        </li>
+
+        <!-- Équipes & Joueurs -->
+        <li class="relative group">
+            <button class="w-full flex items-center p-3 text-gray-800 hover:bg-gray-100 hover:text-blue-600 rounded transition-colors duration-300">
+                <span class="ml-3 text-sm font-semibold whitespace-nowrap">Équipes & Joueurs</span>
+                <svg class="ml-2 w-4 h-4 transition-transform group-hover:rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+                </svg>
+            </button>
+            <ul class="absolute left-0 opacity-0 invisible transition-all duration-300 group-hover:opacity-100 group-hover:visible mt-2 space-y-2 bg-white text-black shadow-lg p-4 z-20 min-w-max">
+                <li><a href="#teams" class="block hover:text-blue-600 py-1">Liste des Équipes</a></li>
+                <li><a href="#players" class="block hover:text-blue-600 py-1">Liste des Joueurs</a></li>
+                <li><a href="#add-team" class="block hover:text-blue-600 py-1">Ajouter une Équipe</a></li>
+                <li><a href="#add-player" class="block hover:text-blue-600 py-1">Ajouter un Joueur</a></li>
+                <li><a href="#team-performance" class="block hover:text-blue-600 py-1">Performance des Équipes</a></li>
+                <li><a href="#player-performance" class="block hover:text-blue-600 py-1">Performance des Joueurs</a></li>
+            </ul>
+        </li>
+
+        <!-- Rencontres & Résultats -->
+        <li class="relative group">
+            <button class="w-full flex items-center p-3 text-gray-800 hover:bg-gray-100 hover:text-blue-600 rounded transition-colors duration-300">
+                <span class="ml-3 text-sm font-semibold whitespace-nowrap">Rencontres & Résultats</span>
+                <svg class="ml-2 w-4 h-4 transition-transform group-hover:rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+                </svg>
+            </button>
+            <ul class="absolute left-0 opacity-0 invisible transition-all duration-300 group-hover:opacity-100 group-hover:visible mt-2 space-y-2 bg-white text-black shadow-lg p-4 z-20 min-w-max">
+                <li><a href="#schedule" class="block hover:text-blue-600 py-1">Calendrier</a></li>
+                <li><a href="#live-scores" class="block hover:text-blue-600 py-1">Résultats en Direct</a></li>
+                <li><a href="#match-analysis" class="block hover:text-blue-600 py-1">Analyse des Matchs</a></li>
+                <li><a href="#referees" class="block hover:text-blue-600 py-1">Arbitres Assignés</a></li>
+            </ul>
+        </li>
+
+        <!-- Statistiques -->
+        <li class="relative group">
+            <button class="w-full flex items-center p-3 text-gray-800 hover:bg-gray-100 hover:text-blue-600 rounded transition-colors duration-300">
+                <span class="ml-3 text-sm font-semibold whitespace-nowrap">Statistiques</span>
+                <svg class="ml-2 w-4 h-4 transition-transform group-hover:rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+                </svg>
+            </button>
+            <ul class="absolute left-0 opacity-0 invisible transition-all duration-300 group-hover:opacity-100 group-hover:visible mt-2 space-y-2 bg-white text-black shadow-lg p-4 z-20 min-w-max">
+                <li><a href="#stats-overview" class="block hover:text-blue-600 py-1">Résumé du Tournoi</a></li>
+                <li><a href="#best-players" class="block hover:text-blue-600 py-1">Meilleurs Buteurs</a></li>
+                <li><a href="#referee-stats" class="block hover:text-blue-600 py-1">Performances des Arbitres</a></li>
+                <li><a href="#team-comparison" class="block hover:text-blue-600 py-1">Comparaison des Équipes</a></li>
+                <li><a href="#top-scorers" class="block hover:text-blue-600 py-1">Top Buteurs</a></li>
+            </ul>
+        </li>
+
+        <!-- Test -->
+        <li class="relative group">
+            <a 
+                routerLink="/test" 
+                class="w-full flex items-center p-3 text-gray-800 hover:bg-gray-100 hover:text-blue-600 rounded transition-colors duration-300"
+            >
+                <span class="ml-3 text-sm font-semibold whitespace-nowrap">Test liaison API</span>
+            </a>
+        </li>
+    </ul>
+
+    Test liaison API
+
+    <!-- Section basse -->
+    <div class="border-t border-gray-200 pt-2">
+        <button class="w-full flex items-center p-3 text-gray-800 hover:bg-blue-100 hover:text-blue-600 rounded transition-colors duration-300">
+            <span class="ml-3 text-sm font-semibold">Paramètres</span>
+        </button>
+        <button class="w-full flex items-center p-3 text-gray-800 hover:bg-blue-100 hover:text-blue-600 rounded transition-colors duration-300">
+            <span class="ml-3 text-sm font-semibold">Déconnexion</span>
+        </button>
+    </div>
+</nav>
