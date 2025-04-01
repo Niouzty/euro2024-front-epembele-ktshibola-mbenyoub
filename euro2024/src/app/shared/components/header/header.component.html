@@ -15,7 +15,7 @@
                 </svg>
             </button>
             <ul class="absolute left-0 opacity-0 invisible transition-all duration-300 group-hover:opacity-100 group-hover:visible mt-2 space-y-2 bg-white text-black shadow-lg p-4 z-20 min-w-max">
-                <li><a href="#general-data" class="block hover:text-blue-600 py-1">Visualisation</a></li>
+                <li><a routerLink="/table-list" class="block hover:text-blue-600 py-1">Visualisation</a></li>
                 <li><a href="#add-entry" class="block hover:text-blue-600 py-1">Ajouter Entrée</a></li>
                 <li><a href="#edit-entry" class="block hover:text-blue-600 py-1">Modifier Entrée</a></li>
                 <li><a href="#delete-entry" class="block hover:text-blue-600 py-1">Supprimer Entrée</a></li>
@@ -75,18 +75,8 @@
             </ul>
         </li>
 
-        <!-- Test -->
-        <li class="relative group">
-            <a 
-                routerLink="/test" 
-                class="w-full flex items-center p-3 text-gray-800 hover:bg-gray-100 hover:text-blue-600 rounded transition-colors duration-300"
-            >
-                <span class="ml-3 text-sm font-semibold whitespace-nowrap">Test liaison API</span>
-            </a>
-        </li>
     </ul>
 
-    Test liaison API
 
     <!-- Section basse -->
     <div class="border-t border-gray-200 pt-2">
