@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Equipe } from '../../models/equipe';
 import { environment } from '../../../environments/environment';
 import { HttpClient } from '@angular/common/http';
-import { Observable, map } from 'rxjs';
+import { Observable, map, tap } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -25,14 +25,12 @@ export class EquipesService {
   // Récupération d'une équipe par ID
   getEquipe(idEquipe: number): Observable<Equipe> {
     return this.http.get<{ data: Equipe }>(`${this.apiUrl}/${idEquipe}`).pipe(
-      map(response => response.data)
+      map(response =>  response.data)
     );
-  }
+  }                                               
 
   // Récupération de toutes les équipes
   getEquipes(): Observable<Equipe[]> {
-    return this.http.get<{ data: Equipe[] }>(this.apiUrl).pipe(
-      map(response => response.data || [])
-    );
+    return this.http.get<Equipe[]>(this.apiUrl);
   }
 }
