@@ -1,0 +1,76 @@
+<div class="container mx-auto px-4 py-8">
+    <div class="bg-white rounded-xl shadow-md overflow-hidden">
+      <!-- En-tête -->
+      <div class="px-6 py-4 border-b border-gray-200">
+        <h2 class="text-2xl font-bold text-gray-800">Liste des Joueurs</h2>
+        <p class="text-gray-600">Classés par ID Stats</p>
+      </div>
+  
+      <!-- Tableau -->
+      <div class="overflow-x-auto">
+        <table class="min-w-full divide-y divide-gray-200">
+          <thead class="bg-gray-50">
+            <tr>
+              <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                ID Stats
+                <span class="ml-1">↑</span> <!-- Indicateur de tri -->
+              </th>
+              <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Nom</th>
+              <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Prénom</th>
+              <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Équipe</th>
+              <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">But</th>
+            </tr>
+          </thead>
+          <tbody class="bg-white divide-y divide-gray-200">
+            @for (joueur of joueurswithstats; track joueur.id_joueur) {
+            <tr class="hover:bg-gray-50 transition-colors">
+              <!-- Colonne ID Stats -->
+              <td class="px-6 py-4 whitespace-nowrap">
+                <div class="text-sm font-medium text-blue-600">{{ joueur.id_stats_joueur || '-' }}</div>
+              </td>
+              
+              <!-- Colonne Nom -->
+              <td class="px-6 py-4 whitespace-nowrap">
+                <div class="text-sm font-medium text-gray-900">{{ joueur.nom }}</div>
+              </td>
+              
+              <!-- Colonne Prénom -->
+              <td class="px-6 py-4 whitespace-nowrap">
+                <div class="text-sm text-gray-900">{{ joueur.prenom }}</div>
+              </td>
+              
+              <!-- Colonne Équipe -->
+              <td class="px-6 py-4 whitespace-nowrap">
+                <div class="text-sm text-gray-500">{{ joueur.id_equipe }}</div>
+              </td>
+
+              <!-- Colonne But -->
+              <td class="px-6 py-4 whitespace-nowrap">
+                <div class="text-sm text-gray-500">{{ joueur.buts_marques }}</div>
+              </td>
+              
+      
+            </tr>
+            } @empty {
+            <tr>
+              <td colspan="5" class="px-6 py-4 text-center text-sm text-gray-500">
+                Aucun joueur trouvé
+              </td>
+            </tr>
+            }
+          </tbody>
+        </table>
+      </div>
+  
+      <!-- Pied de tableau -->
+      <div class="bg-gray-50 px-6 py-3 flex items-center justify-between border-t border-gray-200">
+        <div class="text-sm text-gray-500">
+          Total: {{ joueurswithstats.length}} joueurs
+        </div>
+        <button (click)="rafraichir()" 
+                class="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 transition">
+          Rafraîchir
+        </button>
+      </div>
+    </div>
+  </div>

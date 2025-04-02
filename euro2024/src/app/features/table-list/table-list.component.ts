@@ -12,7 +12,7 @@ import { RouterModule , Router} from '@angular/router';
 
 export class TableListComponent {
   tables = [
-    { name: 'Équipes', path: '/equipe_list' },
+    { name: 'Équipes', path: '/equipe-list' },
     { name: 'Joueurs', path: '/joueurs' },
     { name: 'Matchs', path: '/matchs' }
   ];
