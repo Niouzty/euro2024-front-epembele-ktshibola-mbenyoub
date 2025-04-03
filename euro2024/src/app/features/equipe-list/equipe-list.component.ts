@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { EquipesService } from '../../core/services/equipes.service';
-import { Equipe } from '../../models/equipe';
+import { Equipe } from '../../models/equipe.model';
 import { HttpClientModule } from '@angular/common/http';
 
 
@@ -11,6 +11,7 @@ import { HttpClientModule } from '@angular/common/http';
   templateUrl: './equipe-list.component.html',
   styleUrl: './equipe-list.component.scss'
 })
+
 export class EquipeListComponent {
 equipes: Equipe[] = [];
   isLoading = true;
@@ -31,7 +32,7 @@ equipes: Equipe[] = [];
     },
     error: (err) => this.errorMessage = 'Erreur lors du chargement des équipes'
   });
-}
+  }
 
   onDelete(id: number): void {
     if (confirm('Êtes-vous sûr de vouloir supprimer cette équipe ?')) {
