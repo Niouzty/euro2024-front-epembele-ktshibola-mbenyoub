@@ -1,0 +1,24 @@
+<h1>Stade :{{ ID }}</h1>
+<button>Supprimer ce Stade</button>
+
+<div>
+    <h3>Nom :</h3>
+    <h3>Ville :</h3>
+    <h3>Capacité :</h3>
+    <h3>Moyenne de visiteur par match :</h3>
+
+</div>
+
+
+
+<app-tableau-data
+[titre]="'Historique des matchs'"
+[objets]="rencontres"
+[pageMax]="pageMax"
+(pageChange)="chargementPage($event)"
+>
+
+</app-tableau-data>
+
+
+

@@ -1,109 +1,115 @@
-import { Component, EventEmitter, Input, Output,NgModule, OnInit } from '@angular/core';
-import { FormsModule } from '@angular/forms'; 
+import { Component, EventEmitter, Input, Output, SimpleChanges, OnChanges } from '@angular/core';
+import { FormsModule } from '@angular/forms';
+import { RouterLink } from '@angular/router';
+
 @Component({
   selector: 'app-tableau-data',
-  imports: [FormsModule], 
+  imports: [FormsModule,RouterLink],
   templateUrl: './tableau-data.component.html',
   styleUrl: './tableau-data.component.scss'
 })
+export class TableauDataComponent<T extends Record<string, any> & { id: {value : number | string, url: string}}> implements OnChanges {
 
-
-export class TableauDataComponent<T extends Record<string, any>> implements OnInit{
-  @Input({ required: true }) titre!: string; 
-  @Input({ required: true }) objets!: T[];  
-  @Input({ required: true }) pageMax!: number; 
+  @Input({ required: true }) titre!: string;
+  @Input({ required: true }) objets!: T[];
+  @Input({ required: true }) pageMax!: number;
   @Input() fonctionTries: Record<string, (values: T[]) => T[]>[] = [];
 
-  
-  ngOnInit() {
-    // Affiche la longueur du tableau d'inputs dans la console
-    console.log(this.fonctionTries.length);
-  }
+  @Output() pageChange = new EventEmitter<number>();
+  @Output() changeValue = new EventEmitter<{column : string,id: number | string, newValue : number | string }>();
 
   pageActuelle: number = 1;
-  @Output() pageChange = new EventEmitter<number>(); 
-
-  input: string = ''; 
+  input: string = '';
   trie_actif: string[] = [];
+  filteredValues: T[] = [];
 
 
 
+  editedRow: number | string | null = null; 
 
-
-
-
-  
-  get tries(): string[] {
-  return Array.from(
-    new Set(this.fonctionTries.flatMap(record => Object.keys(record)))
-  );
-}
-
-
-  
-  get keys(): string[] {
-    return this.objets.length > 0 ? Object.keys(this.objets[0]) : [];
-  }
-  
-
-  get values(): T[][] {
-    return this.objets.map(obj => this.keys.map(key => obj[key]));
+  startEditing(id: number | string) {
+    this.editedRow = id;
   }
 
-  get finalValues(): T[] {
-    let values: T[] = this.appliquerTrie();
-    let recherche = this.input.toLowerCase().trim(); 
-  
-    return values.filter(obj =>
-      Object.values(obj).some(val => 
-        val.toString().trim().toLowerCase().includes(recherche) 
+  stopEditing() {
+    this.editedRow = null;
+  }
+
+
+
+
+  ngOnChanges(changes: SimpleChanges): void {
+    if (changes['objets'] || changes['fonctionTries']) {
+      this.updateFilteredValues();
+    }
+  }
+
+  updateFilteredValues(): void {
+    if (!this.objets) return;
+
+    let values = this.appliquerTrie();
+    const recherche = this.input.toLowerCase().trim();
+
+    this.filteredValues = values.filter(obj =>
+      Object.values(obj).some(val =>
+        val?.toString().trim().toLowerCase().includes(recherche)
       )
     );
   }
-  
+
+  get tries(): string[] {
+    return [...new Set(this.fonctionTries.flatMap(record => Object.keys(record)))];
+  }
+
+  get keys(): string[] {
+    return this.objets?.length > 0 ? Object.keys(this.objets[0]) : [];
+  }
 
   appliquerTrie(): T[] {
-    let valeurTriee: T[] = this.objets;
+    let valeurTriee = [...this.objets];
 
     for (const trie of this.trie_actif) {
-      const recordTrouve = this.fonctionTries.find(record => record.hasOwnProperty(trie));
-
-      if (recordTrouve) {
-        const funTrie = recordTrouve[trie];
-        if (funTrie) {
-          valeurTriee = funTrie(valeurTriee);
-        }
+      const trieFn = this.fonctionTries
+        .find(record => record[trie])?.[trie];
+      
+      if (trieFn) {
+        valeurTriee = trieFn(valeurTriee);
       }
     }
 
     return valeurTriee;
   }
 
-  toggleFiltre(key: string) {
-    if (this.trie_actif.includes(key)) {
-      this.trie_actif = this.trie_actif.filter(f => f !== key);
-    } else {
-      this.trie_actif.push(key);
-    }
+
+  haveURL(value: any): boolean {
+    return typeof value === 'object' && value !== null && 'url' in value;
+  }
+  
+
+  toggleFiltre(key: string): void {
+    this.trie_actif = this.trie_actif.includes(key) ? this.trie_actif.filter(f => f !== key) : [...this.trie_actif, key];
+    
+    this.updateFilteredValues();
   }
 
-  suivant() {
+  suivant(): void {
     if (this.pageActuelle < this.pageMax) {
-      this.pageActuelle++;
-      this.pageChange.emit(this.pageActuelle);
+      this.pageChange.emit(++this.pageActuelle);
     }
   }
 
-  precedent() {
+  precedent(): void {
     if (this.pageActuelle > 1) {
-      this.pageActuelle--;
-      this.pageChange.emit(this.pageActuelle);
+      this.pageChange.emit(--this.pageActuelle);
     }
   }
 
+  
 
-
-  toString(values: T): string[] {
-    return Object.values(values); 
+  miseAJourValeur(id: number | string, column: string, newValue: number | string) {
+    this.changeValue.emit({ id, column, newValue });
   }
+  
+
+  
 }

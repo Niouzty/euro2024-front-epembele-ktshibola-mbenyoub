@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Columns } from '../Modeles/Columns';
+import { Column } from '../Modeles/Columns';
 
 @Injectable({
   providedIn: 'root'
@@ -7,10 +7,10 @@ import { Columns } from '../Modeles/Columns';
 
 export class DatabaseService {
   table = [
-    new Columns('Id_stade',true,false),
-    new Columns('capacité',true,false),
-    new Columns('ville',false,false),
-    new Columns('nom',false,false)
+    new Column('Id_stade',true,false),
+    new Column('capacité',true,false),
+    new Column('ville',false,false),
+    new Column('nom',false,false)
   ];
 
   constructor() { }

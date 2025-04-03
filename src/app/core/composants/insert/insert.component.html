@@ -1,0 +1,57 @@
+<div class="data-manager">
+
+    <section class="add-section">
+      <h1>Ajouter des données</h1>
+      
+      <form (ngSubmit)="submit()" class="inline-form">
+        @for (column of namesColumns; track column) {
+          <div class="form-item">
+            <label class="input-label">{{ column }}</label>
+            <input 
+              [(ngModel)]="inputValues[column]"
+              [name]="column"
+              class="form-input"
+              type="text"
+              required>
+          </div>
+        }
+        <button type="submit" class="submit-btn">Valider</button>
+      </form>
+    </section>
+  
+
+    <section class="edit-section">
+      <h2>Modifier les données</h2>
+      
+      <div class="inline-list">
+        @for (item of listInput; track item; let i = $index) {
+          <div 
+            class="list-item"
+            (dblclick)="rowUpdate(i)"
+            [class.editing-item]="updateRow === i">
+            
+            @for (column of namesColumns; track column) {
+              <div class="item-field">
+                @if (updateRow !== i) {
+                  <span class="field-value">{{ item[column] }}</span>
+                } @else {
+                  <input 
+                    [(ngModel)]="item[column]"
+                    class="inline-edit"
+                    type="text"
+                    (blur)="validUpdate()"
+                    autofocus>
+                }
+              </div>
+            }
+          </div>
+        }
+      </div>
+  
+      @if (listInput.length > 0) {
+        <p class="hint">Double-cliquez pour éditer</p>
+      }
+    </section>
+  
+    <button (click)="submitFinal()" class="submit-btn">Envoyer</button>
+  </div>

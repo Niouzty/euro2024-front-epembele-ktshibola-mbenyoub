@@ -1,6 +1,10 @@
 export type Stade = {
-    id_stade: number;
+    id: {
+        value: number;
+        url: string;
+    };
     nom: string;
     ville: string;
-    capacite: number; 
+    capacite: number;
 };
+

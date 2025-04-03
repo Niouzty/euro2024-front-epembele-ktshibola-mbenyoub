@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { Columns } from '../../../Modeles/Columns';
+import { Column } from '../../../Modeles/Columns';
 
 @Component({
   selector: 'app-table',
@@ -12,26 +12,26 @@ export class TableComponent {
   nom!: string;
 
   @Input({ required: true })
-  columns!: Columns[];
+  columns!: Column[];
 
-  getUrl(column: Columns): string {
+  getUrl(column: Column): string {
     return column.isFK ? `https://example.com/${column.nom}` : '';
   }
 
-  createBalise(column: Columns): string {
+  createBalise(column: Column): string {
     return column.isFK ? this.createBaliseFK(column) : this.createSBalise(column);
   }
 
-  private createBaliseFK(column: Columns): string {
+  private createBaliseFK(column: Column): string {
     const url = this.getUrl(column);
     return `<a class='${this.getCssClass(column)}' href='${url}'>${column.nom}</a>`;
   }
 
-  private createSBalise(column: Columns): string {
+  private createSBalise(column: Column): string {
     return `<p class='${this.getCssClass(column)}'>${column.nom}</p>`;
   }
 
-  private getCssClass(column: Columns): string {
+  private getCssClass(column: Column): string {
     let classes = "column-field"; // Style de base pour tous les champs
 
     if (column.isPK) {
