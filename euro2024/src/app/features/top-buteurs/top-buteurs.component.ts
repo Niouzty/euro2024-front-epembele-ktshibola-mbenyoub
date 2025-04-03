@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { JoueurWithStats } from '../../models/joueurwithstats';
+import { JoueurWithStats } from '../../models/joueurwithstats.model';
 import { StatsJoueurService } from '../../core/services/stats-joueur.service';
 import { HttpClientModule } from '@angular/common/http';
 
