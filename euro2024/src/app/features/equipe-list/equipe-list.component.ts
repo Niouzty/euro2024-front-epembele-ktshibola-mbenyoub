@@ -13,7 +13,7 @@ import { HttpClientModule } from '@angular/common/http';
 })
 
 export class EquipeListComponent {
-equipes: Equipe[] = [];
+  equipes: Equipe[] = [];
   isLoading = true;
   errorMessage = '';
 
@@ -26,7 +26,6 @@ equipes: Equipe[] = [];
   loadEquipes(): void {
   this.equipesService.getEquipes().subscribe({
     next: (data) => {
-      // S'assurer que data est un tableau
       this.equipes = Array.isArray(data) ? data : [data];
       console.log(this.equipes);
     },
