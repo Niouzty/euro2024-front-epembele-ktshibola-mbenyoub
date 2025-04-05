@@ -13,19 +13,23 @@ import { ArbitreWithResult } from '../../models/arbitrewithresult.model';
   styleUrl: './arbitre-performance.component.scss'
 })
 export class ArbitrePerformanceComponent {
-  arbitre: any
+  arbitresWithResult: ArbitreWithResult[] = [];
   isLoading = false;
   errorMessage = '';
 
   constructor(private arbitreService: ArbitreService){}
 
-  getAllResult(id_arbitre: number): void{
+  ngOnInit(): void{
+    this.getAllResult();
+  }
+  
+  getAllResult(): void{
     this.isLoading = true;
 
-    this.arbitreService.get_all_result(id_arbitre).subscribe({
+    this.arbitreService.get_all_result().subscribe({
       next: (data) => {
-        this.arbitre = data;
-        this.isLoading = false;
+        this.arbitresWithResult = Array.isArray(data) ? data : [data];
+        console.log(this.arbitresWithResult);
       },
       error: (err) => {
         this.errorMessage = 'Erreur lors du chargement des statistiques';
@@ -35,5 +39,4 @@ export class ArbitrePerformanceComponent {
     });
 
   }
-
 }

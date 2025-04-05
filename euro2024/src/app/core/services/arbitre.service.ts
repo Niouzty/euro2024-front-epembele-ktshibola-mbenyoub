@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { environment } from '../../../environments/environment';
 import { ArbitreWithResult } from '../../models/arbitrewithresult.model';
+import { Arbitre } from '../../models/arbitre.model';
 import { HttpClient } from '@angular/common/http';
 import { Observable, map, tap } from 'rxjs';
 
@@ -8,15 +9,16 @@ import { Observable, map, tap } from 'rxjs';
   providedIn: 'root'
 })
 export class ArbitreService {
-  private apiUrl = `${environment.apiUrl}/arbitres`
+  private apiUrl = `${environment.apiUrl}/arbitres`;
 
   constructor(private http: HttpClient) {}
 
-  get_all_result(id_arbitre: number): Observable<ArbitreWithResult>{
-    return this.http.get<{data: ArbitreWithResult}>(`${this.apiUrl}${id_arbitre}/arbitre-result`
-      
-    ).pipe(
-      map(response => response.data)
-    );
+  get_all_result(): Observable<ArbitreWithResult[]>{
+    return this.http.get<ArbitreWithResult[]>(`${this.apiUrl}/arbitre-result`);
   }
+
+  get_all_arbitres(): Observable<Arbitre[]>{
+    return this.http.get<Arbitre[]>(this.apiUrl);
+  }
+
 }
