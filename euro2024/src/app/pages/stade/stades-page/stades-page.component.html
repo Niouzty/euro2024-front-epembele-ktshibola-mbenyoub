@@ -1,0 +1,16 @@
+<div style="display: flex; flex-direction: column; align-items: center; width: 100%;">
+    <app-table [columns]="table">Stades: </app-table>
+   
+    <app-tableau-data
+      [titre]="titre"
+      [objets]="stades"
+      [pageMax]="pageMax"
+      (pageChange)="chargementPage($event)"
+      [fonctionTries]="fonctionTries"
+      (changeValue)="changeValue($event)"
+    ></app-tableau-data>
+
+    <app-insert [table]="tables" (inserted)="onStadeInsert($event)"></app-insert>
+
+  </div>
+  

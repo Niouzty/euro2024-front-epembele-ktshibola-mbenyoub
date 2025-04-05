@@ -1,0 +1,11 @@
+<div class="table-container">
+    <ng-content></ng-content>
+    (
+    @for (column of columns; track $index) {
+        <span [innerHTML]="createBalise(column)"></span>
+        @if (!$last) {
+            , 
+        }
+    }
+    )
+</div>

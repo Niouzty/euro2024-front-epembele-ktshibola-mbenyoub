@@ -15,10 +15,10 @@
                 </svg>
             </button>
             <ul class="absolute left-0 opacity-0 invisible transition-all duration-300 group-hover:opacity-100 group-hover:visible mt-2 space-y-2 bg-white text-black shadow-lg p-4 z-20 min-w-max">
-                <li><a routerLink="/table-list" class="block hover:text-blue-600 py-1">Visualisation</a></li>
+                <li><a [routerLink]="'/stades'" class="block hover:text-blue-600 py-1">Stades</a></li>
 
-                <li><a href="#filter-data" class="block hover:text-blue-600 py-1">Filtrer les Données</a></li>
-                <li><a href="#sort-data" class="block hover:text-blue-600 py-1">Trier les Données</a></li>
+                <li><a href="/stades" class="block hover:text-blue-600 py-1">Rencontres</a></li>
+                <li><a href="/stades" class="block hover:text-blue-600 py-1">Joueurs</a></li>
             </ul>
         </li>
 

@@ -1,0 +1,70 @@
+<div class="container">
+  <h2>{{ titre }}</h2>
+
+  <input 
+    type="text" 
+    [(ngModel)]="input" 
+    (ngModelChange)="updateFilteredValues()"
+    placeholder="Rechercher..."
+    class="search-bar"
+  >
+
+  <div class="filters">
+    @for (trie of tries; track trie) {
+      <label>
+        <input
+          type="checkbox"
+          [checked]="trie_actif.includes(trie)"
+          (change)="toggleFiltre(trie)"
+        />
+        {{ trie }}
+      </label>
+    }
+  </div>
+
+  @if (filteredValues.length > 0) {
+    <table class="tableau">
+      <thead>
+        <tr>
+          @for (key of keys; track key) {
+            <th>{{ key }}</th>
+          }
+        </tr>
+      </thead>
+      <tbody>
+        @for (item of filteredValues; track $index) {
+          <tr (dblclick)="startEditing(item.id.value)" (mouseleave)="stopEditing()">
+            @for (key of keys; track key) {
+              <td>
+                @if (key === 'id') {
+                  <a [routerLink]="item.id.url">{{ item.id.value }}</a>                
+                } @else {
+                  @if (editedRow === item.id.value) {
+                    <input 
+                      type="text" 
+                      [(ngModel)]="item[key]" 
+                      (change)="miseAJourValeur(item.id.value, key, item[key])" 
+                    />
+                  } @else {
+                    <span>{{ item[key] }}</span>
+                  }
+                }
+              </td>
+            }
+          </tr>
+        }
+        
+      </tbody>
+    </table>
+  
+  
+
+    <div class="pagination">
+      <button (click)="precedent()">Précédent</button>
+      <span>{{ pageActuelle }} / {{ pageMax }}</span>
+      <button (click)="suivant()">Suivant</button>
+    </div>
+  } @else {
+    <p class="empty-message">Aucune donnée trouvée</p>
+  }
+</div>
