@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { catchError, map, Observable, of, tap } from 'rxjs';
-import { Stade } from '../../models/Stade';
+import { Stade, StadeBD } from '../../models/Stade';
 
 
 @Injectable({
@@ -25,7 +25,7 @@ export class StadesService {
           url: `/stades/${stade.id_stade}`
         }, 
         nom: stade.nom,
-        ville: stade.ville,
+        id_ville: stade.id_ville,
         capacite: stade.capacite
       }));
     }),
@@ -36,12 +36,12 @@ export class StadesService {
    );
 }
 
-getStade(id: number): Observable<Stade> {
+getStade(id: number): Observable<StadeBD> {
   return this.http.get<{ result: any }>(this.url + id).pipe(
     map(response => ({
-      id: response.result.id_stade,
+      id_stade: response.result.id_stade,
       nom: response.result.nom,
-      ville: response.result.ville,
+      id_ville: response.result.id_ville,
       capacite: response.result.capacite,
     }))
   );
@@ -78,7 +78,7 @@ getStade(id: number): Observable<Stade> {
     );
   }
 
-  insertStades(data: { Id_stade: string | number; nom: string; ville: number; capacite: number; }[]): Observable<any> {
+  insertStades(data: StadeBD[]): Observable<any> {
     return this.http.post<any>(`${this.url}batch`, data);
   }
   
