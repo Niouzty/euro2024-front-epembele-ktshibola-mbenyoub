@@ -6,8 +6,7 @@ import { TableComponent } from '../../../core/composants/table/table.component';
 import { TableauDataComponent } from '../../../core/composants/tableau-data/tableau-data.component';
 import { DatabaseService } from '../../../core/services/database.service';
 import { StadesService } from '../../../core/services/stades.service';
-import { Column } from '../../../models/Columns';
-import { Stade } from '../../../models/Stade';
+import { Stade, StadeBD } from '../../../models/Stade';
 import { Table } from '../../../models/Table';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 
@@ -18,9 +17,7 @@ import { HttpClient, HttpClientModule } from '@angular/common/http';
     CommonModule,
     TableauDataComponent,
     FormsModule,
-    TableComponent,
     InsertComponent,
-    HttpClientModule,
   
 ], 
   templateUrl: './stades-page.component.html', 
@@ -32,9 +29,7 @@ export class StadesPageComponent implements OnInit {
   stades: Stade[] = [];
   taillePage: number = 10;
   nombreTotalStades: number = 0;
-  
-  table: Column[] = [];
-  tables: Table = new Table(this.table);
+  schema! : Table;
   pageActuelle : number = -1;
 
   constructor(
@@ -75,8 +70,8 @@ export class StadesPageComponent implements OnInit {
       }
     });
 
-    this.table = this.bdservice.table;
-    this.tables = new Table(this.table);
+    
+   
   }
 
   chargementPage(page: number): void {
@@ -122,10 +117,10 @@ export class StadesPageComponent implements OnInit {
   }
 
   onStadeInsert(data: Record<string, any>[])  {
-    const dataMap = data.map(item => ({
-      Id_stade: item['Id_stade'],
+    const dataMap : StadeBD[] = data.map(item => ({
+      id_stade: item['id_stade'],
       nom: String(item['nom']),
-      ville: Number(item['ville']),
+      id_ville: Number(item['id_ville']),
       capacite: Number(item['capacite'])
     }));
 

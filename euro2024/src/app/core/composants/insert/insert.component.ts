@@ -18,7 +18,7 @@ export class InsertComponent {
   updateRow: number = -1;
 
   get namesColumns(): string[] {
-    return this.table.getNom();
+    return this.table.columns;
   }
 
   rowUpdate(i: number): void {
@@ -47,7 +47,7 @@ export class InsertComponent {
   }
 
   private isValid(): boolean {
-    return this.table.getNom().every(c => {
+    return this.table.columns.every(c => {
       const value = this.inputValues[c];
       return value !== null && 
              value !== undefined && 

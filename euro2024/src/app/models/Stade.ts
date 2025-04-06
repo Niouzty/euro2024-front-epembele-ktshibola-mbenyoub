@@ -4,7 +4,11 @@ export type Stade = {
         url: string;
     };
     nom: string;
-    ville: string;
+    id_ville: number;
     capacite: number;
 };
 
+export interface StadeBD extends Omit<Stade, 'id'> {
+    id_stade: number;
+}
+  

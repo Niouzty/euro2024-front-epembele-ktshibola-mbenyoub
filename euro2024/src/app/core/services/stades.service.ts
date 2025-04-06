@@ -11,7 +11,7 @@ import { Stade, StadeBD } from '../../models/Stade';
 
 export class StadesService {
   constructor(private readonly http: HttpClient) {}
-  url   = "http://127.0.0.1:5000/stades/";
+  url = "http://127.0.0.1:5000/stades/";
 
  getStades(page: number, taillePage: number): Observable<Stade[]> {
   return this.http.get<{ result: any[] }>(`${this.url}?offset=${page}&limit=${taillePage}`).pipe(

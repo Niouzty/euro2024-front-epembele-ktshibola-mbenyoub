@@ -1,8 +1,8 @@
 <div class="table-container">
-    <ng-content></ng-content>
+   <h2>{{table.table_name}}</h2>
     (
-    @for (column of columns; track $index) {
-        <span [innerHTML]="createBalise(column)"></span>
+    @for (col of table.columns; track $index) {
+        <p>col</p>
         @if (!$last) {
             , 
         }

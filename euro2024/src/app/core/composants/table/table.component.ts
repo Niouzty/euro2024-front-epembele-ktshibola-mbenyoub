@@ -1,5 +1,6 @@
 import { Component, Input } from '@angular/core';
-import { Column } from '../../../models/Columns';
+import { Table } from '../../../models/Table';
+import { log } from 'console';
 
 @Component({
   selector: 'app-table',
@@ -12,8 +13,10 @@ export class TableComponent {
   nom!: string;
 
   @Input({ required: true })
-  columns!: Column[];
+  table!: Table;
 
+  /*
+  
   getUrl(column: Column): string {
     return column.isFK ? `https://example.com/${column.nom}` : '';
   }
@@ -28,6 +31,8 @@ export class TableComponent {
   }
 
   private createSBalise(column: Column): string {
+  
+    console.log(column);
     return `<p class='${this.getCssClass(column)}'>${column.nom}</p>`;
   }
 
@@ -40,4 +45,5 @@ export class TableComponent {
 
     return classes.trim(); // Retire les espaces inutiles
   }
+  */
 }
