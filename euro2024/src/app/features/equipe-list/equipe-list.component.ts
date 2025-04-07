@@ -1,18 +1,18 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { EquipesService } from '../../core/services/equipes.service';
 import { Equipe } from '../../models/equipe.model';
+import { TableauDataComponent } from '../../shared/components/tableau-data/tableau-data.component';
+import { CommonModule } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
-
+import { RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-equipe-list',
-  imports: [HttpClientModule],
-  providers: [EquipesService],
+  standalone: true,
+  imports: [CommonModule, HttpClientModule, RouterModule, TableauDataComponent],
   templateUrl: './equipe-list.component.html',
-  styleUrl: './equipe-list.component.scss'
 })
-
-export class EquipeListComponent {
+export class EquipeListComponent implements OnInit {
   equipes: Equipe[] = [];
   isLoading = true;
   errorMessage = '';
@@ -24,13 +24,17 @@ export class EquipeListComponent {
   }
 
   loadEquipes(): void {
-  this.equipesService.getEquipes().subscribe({
-    next: (data) => {
-      this.equipes = Array.isArray(data) ? data : [data];
-      console.log(this.equipes);
-    },
-    error: (err) => this.errorMessage = 'Erreur lors du chargement des équipes'
-  });
+    this.isLoading = true;
+    this.equipesService.getEquipes().subscribe({
+      next: (data) => {
+        this.equipes = Array.isArray(data) ? data : [data];
+        this.isLoading = false;
+      },
+      error: (err) => {
+        this.errorMessage = 'Erreur lors du chargement des équipes';
+        this.isLoading = false;
+      }
+    });
   }
 
   onDelete(id: number): void {
@@ -43,5 +47,23 @@ export class EquipeListComponent {
         error: (err) => this.errorMessage = err.message
       });
     }
+  }
+
+  onEdit(id: number): void {
+    // Navigation gérée par le routerLink dans le template
+    console.log('Édition de l\'équipe', id);
+  }
+
+  onValueChange(event: {column: string, id: number, newValue: any}): void {
+    // Solution temporaire sans méthode updateEquipe
+    // On recharge simplement les données depuis le serveur
+    console.warn('Mise à jour non implémentée - rechargement des données');
+    this.loadEquipes();
+    
+    // Alternative: Mise à jour locale uniquement (non persistée)
+    // const index = this.equipes.findIndex(e => e.id_equipe === event.id);
+    // if (index !== -1) {
+    //   this.equipes[index] = { ...this.equipes[index], [event.column]: event.newValue };
+    // }
   }
 }
