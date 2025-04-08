@@ -14,7 +14,7 @@ export class ArbitreService {
   constructor(private http: HttpClient) {}
 
   get_all_result(): Observable<ArbitreWithResult[]>{
-    return this.http.get<ArbitreWithResult[]>(`${this.apiUrl}/arbitre-result`);
+    return this.http.get<ArbitreWithResult[]>(`${this.apiUrl}/arbitres-result`);
   }
 
   get_all_arbitres(): Observable<Arbitre[]>{
