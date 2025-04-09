@@ -122,7 +122,7 @@ export class StadesPageComponent implements OnInit {
       capacite: Number(item['capacite'])
     }));
 
-    this.stadeService.insertStades(dataMap).subscribe({
+    this.stadeService.insert(dataMap).subscribe({
       next: (res) => {
         if (res.status === 200) { 
           this.chargementPage(this.pageActuelle);

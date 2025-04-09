@@ -20,9 +20,9 @@ export class ExportCSVComponent {
 
     try {
       const csv = Papa.unparse(this.data, {
-        quotes: true, // Encadre les valeurs avec des guillemets
-        delimiter: ',', // Séparateur par défaut
-        header: true // Inclut les en-têtes
+        quotes: true, 
+        delimiter: ',', 
+        header: true 
       });
 
       const blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
