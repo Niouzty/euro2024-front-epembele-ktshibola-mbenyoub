@@ -1,9 +1,10 @@
 import { Injectable } from '@angular/core';
-import { Joueur, JoueurBD } from '../../models/joueur';
+
 import { environment } from '../../../environments/environment';
 import { HttpClient } from '@angular/common/http';
 import { catchError, Observable, of } from 'rxjs';
 import { map } from 'rxjs';
+import { Joueur, JoueurBD } from '../../models/joueur.model';
 
 @Injectable({
   providedIn: 'root'

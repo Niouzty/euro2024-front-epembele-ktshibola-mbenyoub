@@ -1,10 +1,10 @@
 import { Component } from '@angular/core';
-import { Joueur, JoueurBD } from '../../../models/joueur';
 import { Table } from '../../../models/Table';
 import { DatabaseService } from '../../../core/services/database.service';
 import { JoueursService } from '../../../core/services/joueurs.service';
 import { TableauDataComponent } from "../../../core/composants/tableau-data/tableau-data.component";
 import { InsertComponent } from "../../../core/composants/insert/insert.component";
+import { Joueur, JoueurBD } from '../../../models/joueur.model';
 
 @Component({
   selector: 'app-joueur-page',
