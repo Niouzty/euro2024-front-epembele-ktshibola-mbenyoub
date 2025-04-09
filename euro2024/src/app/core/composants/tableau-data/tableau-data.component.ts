@@ -17,7 +17,7 @@ export class TableauDataComponent<T extends Record<string, any> & { id: {value :
 
   @Output() pageChange = new EventEmitter<number>();
   @Output() changeValue = new EventEmitter<{column : string,id: number | string, newValue : number | string }>();
-
+  @Output() deleteRow = new EventEmitter<number | string>();
   pageActuelle: number = 1;
   input: string = '';
   trie_actif: string[] = [];
@@ -110,6 +110,10 @@ export class TableauDataComponent<T extends Record<string, any> & { id: {value :
     this.changeValue.emit({ id, column, newValue });
   }
   
+  onRightClick(event: MouseEvent, id: string | number) {
+    event.preventDefault();
+    this.deleteRow.emit(id);
+  }
 
   
 }

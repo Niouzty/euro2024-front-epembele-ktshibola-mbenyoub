@@ -33,7 +33,7 @@
       </thead>
       <tbody>
         @for (item of filteredValues; track $index) {
-          <tr (dblclick)="startEditing(item.id.value)" (mouseleave)="stopEditing()">
+          <tr (dblclick)="startEditing(item.id.value)" (mouseleave)="stopEditing()" (contextmenu)="onRightClick($event, item.id)">
             @for (key of keys; track key) {
               <td>
                 @if (key === 'id') {
@@ -58,12 +58,15 @@
     </table>
   
   
-
-    <div class="pagination">
-      <button (click)="precedent()">Précédent</button>
-      <span>{{ pageActuelle }} / {{ pageMax }}</span>
-      <button (click)="suivant()">Suivant</button>
-    </div>
+     @if (pageMax > 1)
+     {
+        <div class="pagination">
+          <button (click)="precedent()">Précédent</button>
+          <span>{{ pageActuelle }} / {{ pageMax }}</span>
+          <button (click)="suivant()">Suivant</button>
+        </div>
+     }
+    
   } @else {
     <p class="empty-message">Aucune donnée trouvée</p>
   }

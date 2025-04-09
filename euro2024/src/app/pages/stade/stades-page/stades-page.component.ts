@@ -2,13 +2,12 @@ import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { InsertComponent } from '../../../core/composants/insert/insert.component';
-import { TableComponent } from '../../../core/composants/table/table.component';
 import { TableauDataComponent } from '../../../core/composants/tableau-data/tableau-data.component';
 import { DatabaseService } from '../../../core/services/database.service';
 import { StadesService } from '../../../core/services/stades.service';
 import { Stade, StadeBD } from '../../../models/Stade';
 import { Table } from '../../../models/Table';
-import { HttpClient, HttpClientModule } from '@angular/common/http';
+
 
 @Component({
   selector: 'app-stades-page',
@@ -18,7 +17,6 @@ import { HttpClient, HttpClientModule } from '@angular/common/http';
     TableauDataComponent,
     FormsModule,
     InsertComponent,
-  
 ], 
   templateUrl: './stades-page.component.html', 
   styleUrl: './stades-page.component.scss', 
@@ -132,6 +130,22 @@ export class StadesPageComponent implements OnInit {
       },
       error: (err) => {
         console.error('Erreur lors de la mise à jour:', err);
+      }
+    });
+  }
+
+
+  deleteRow(id_stade: number | string): void {
+    this.stadeService.deleteStade(+id_stade).subscribe({
+      next: (success) => {
+        if (success) {
+          alert('Suppression réussie !');
+        } else {
+          alert('Erreur lors de la suppression');
+        }
+      },
+      error: (error) => {
+        alert('Une erreur est survenue lors de la communication avec le serveur' + error);
       }
     });
   }

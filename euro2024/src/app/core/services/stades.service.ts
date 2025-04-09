@@ -81,6 +81,12 @@ getStade(id: number): Observable<StadeBD> {
   insertStades(data: StadeBD[]): Observable<any> {
     return this.http.post<any>(`${this.url}batch`, data);
   }
+
+  deleteStade(id_stade: number): Observable<boolean> {
+    return this.http.delete<{result: boolean}>(this.url + id_stade).pipe(
+      map(res => res.result)
+    );
+  }
   
 }
 
