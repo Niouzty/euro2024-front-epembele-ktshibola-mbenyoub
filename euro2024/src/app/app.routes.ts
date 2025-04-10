@@ -1,9 +1,9 @@
 import { Routes } from '@angular/router';
 import {TableListComponent} from './features/table-list/table-list.component';
 import { HomeComponent } from './features/home/home.component';
-import {EquipeListComponent} from './features/equipe-list/equipe-list.component';
+import { ArbitrePerformanceComponent } from './features/arbitre-performance/arbitre-performance.component';
+import { ComparaisonEquipesComponent } from './features/comparaison-equipes/comparaison-equipes.component';
 import { TopButeursComponent } from './features/top-buteurs/top-buteurs.component'; 
-
 import { StadesPageComponent } from './pages/stade/stades-page/stades-page.component';
 import { HomePageComponent } from './pages/home-page/home-page.component';
 import { NotFoundPageComponent } from './pages/not-found-page/not-found-page.component';
@@ -29,7 +29,8 @@ export const routes: Routes = [
     {path: 'arbitres', component: ArbitresPageComponent},
     {path: 'villes',component: VillesPageComponent},
     {path: 'nationalites',component: NationalitePageComponent},
-    {path:'equipe-list', component: EquipeListComponent},
     {path:'top-buteurs', component: TopButeursComponent},
+    {path:'comparaison-equipes', component: ComparaisonEquipesComponent},
+    {path:'arbitre-performances', component: ArbitrePerformanceComponent},
     {path:'**',component: NotFoundPageComponent}
 ];
