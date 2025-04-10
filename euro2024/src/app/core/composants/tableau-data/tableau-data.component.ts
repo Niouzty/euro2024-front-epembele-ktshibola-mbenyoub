@@ -13,16 +13,18 @@ export class TableauDataComponent<T extends Record<string, any> & { id: {value :
   @Input({ required: true }) titre!: string;
   @Input({ required: true }) objets!: T[];
   @Input({ required: true }) pageMax!: number;
-  @Input() trie!: Record<string,string>;
-  @Input() filtre!: Record<string,string>;
+  @Input() tries: Record<string,number> = {};
+  @Input() filtres: Record<string,number> = {};
 
 
   @Output() pageChange = new EventEmitter<number>();
   @Output() changeValue = new EventEmitter<{column : string,id: number | string, newValue : number | string }>();
   @Output() deleteRow = new EventEmitter<number | string>();
+  @Output() trieChange = new EventEmitter<number>();
+  @Output() filtreChange = new EventEmitter<number>();
+
   pageActuelle: number = 1;
   input: string = '';
-  trie_actif: string[] = [];
   filteredValues: T[] = [];
 
 
@@ -41,46 +43,37 @@ export class TableauDataComponent<T extends Record<string, any> & { id: {value :
 
 
   ngOnChanges(changes: SimpleChanges): void {
-    if (changes['objets'] || changes['fonctionTries']) {
-      this.updateFilteredValues();
+    if (changes['objets']) {
+      this.recherche();
     }
   }
 
-  updateFilteredValues(): void {
-    if (!this.objets) return;
+  recherche(): void {
+    if (!this.objets) 
+      return;
 
-    let values = this.appliquerTrie();
     const recherche = this.input.toLowerCase().trim();
 
-    this.filteredValues = values.filter(obj =>
+    this.filteredValues = this.objets.filter(obj =>
       Object.values(obj).some(val =>
         val?.toString().trim().toLowerCase().includes(recherche)
       )
     );
   }
 
-  get tries(): string[] {
-    return [...new Set(this.fonctionTries.flatMap(record => Object.keys(record)))];
+  get triesK(): string[] {
+    return Object.keys(this.tries);
+  }
+
+  get filtresK(): string[] {
+    return Object.keys(this.filtres);
   }
 
   get keys(): string[] {
     return this.objets?.length > 0 ? Object.keys(this.objets[0]) : [];
   }
 
-  appliquerTrie(): T[] {
-    let valeurTriee = [...this.objets];
-
-    for (const trie of this.trie_actif) {
-      const trieFn = this.fonctionTries
-        .find(record => record[trie])?.[trie];
-      
-      if (trieFn) {
-        valeurTriee = trieFn(valeurTriee);
-      }
-    }
-
-    return valeurTriee;
-  }
+  
 
 
   haveURL(value: any): boolean {
@@ -89,9 +82,11 @@ export class TableauDataComponent<T extends Record<string, any> & { id: {value :
   
 
   toggleFiltre(key: string): void {
-    this.trie_actif = this.trie_actif.includes(key) ? this.trie_actif.filter(f => f !== key) : [...this.trie_actif, key];
-    
-    this.updateFilteredValues();
+    this.filtreChange.emit(this.filtres[key]);    
+  }
+
+  toggleTrie(key: string): void {
+    this.trieChange.emit(this.tries[key]);    
   }
 
   suivant(): void {

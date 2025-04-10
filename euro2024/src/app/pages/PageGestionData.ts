@@ -1,19 +1,38 @@
 import { IService } from "../core/services/Iservice";
 import { Table } from "../models/Table";
 
-export abstract class PageGestionData<E, T extends Record<string, any> & { id: { value: number | string, url: string } }> {
+export abstract class PageGestionData<E, T extends Record<string, any> & { id: { value: number | string, url: string } }>   {
   titre: string = "";
   objets!: T[];
   nombreObjetTotal: number = 0;
   schema!: Table;
   pageActuelle: number = 1;
   service!: IService<E>;
-  url!: string;
 
+  trieActif: number = -1;
+  filtreActif: number[] = [];
 
-  constructor(titre: string,objets: E[],schema:Table,service: IService<E>,url: string)
+  constructor(titre: string, service: IService<E>) {
+    this.titre = titre;
+    this.service = service;
+  }
+
+  init(schema: Table)
   {
+    this.schema = schema;
+    this.chargeDonnee();
+    this.actualiser();
+  }
+
+  chargeDonnee(): void {
+    const savedTrieActif = localStorage.getItem('trieActif');
+    const savedFiltreActif = localStorage.getItem('filtreActif');
+
+    if (savedTrieActif) 
+      this.trieActif = JSON.parse(savedTrieActif);
     
+    if (savedFiltreActif)
+      this.filtreActif = JSON.parse(savedFiltreActif);
   }
 
   actualiser(): void {
@@ -26,10 +45,9 @@ export abstract class PageGestionData<E, T extends Record<string, any> & { id: {
     this.chargementPage(this.pageActuelle);
   }
 
-
   chargementPage(page: number): void {
     this.pageActuelle = page;
-    this.service.getAll(page, 10).subscribe({
+    this.service.getAll(page, 10,this.trieActif,this.filtreActif).subscribe({
       next: (response) => {
         if (response.length > 0) {
           this.objets = response.map(this.convertData);
@@ -67,7 +85,6 @@ export abstract class PageGestionData<E, T extends Record<string, any> & { id: {
     });
   }
 
-
   onInsert(data: E[]) {
     this.service.insert(data).subscribe({
       next: (res) => {
@@ -96,8 +113,27 @@ export abstract class PageGestionData<E, T extends Record<string, any> & { id: {
     });
   }
 
-  abstract convertData(data: E): T;
-  abstract get trie(): Record<string,string>;
-  abstract get filtre(): Record<string,string>;
+  toggleFiltre(codeFiltre: number): void {
+    if (this.filtreActif.includes(codeFiltre)) {
+      this.filtreActif = this.filtreActif.filter(code => code !== codeFiltre);
+    } else {
+      this.filtreActif.push(codeFiltre);
+    }
 
+    localStorage.setItem('filtreActif',  JSON.stringify(this.filtreActif));
+  }
+
+  toggleTrie(codeTrie: number): void {
+    if (this.trieActif !== codeTrie) {
+      this.trieActif = codeTrie;
+    } else {
+      this.trieActif = -1;
+    }
+
+    localStorage.setItem('trieActif', String(this.trieActif));
+  }
+
+  abstract convertData(data: E): T;
+  abstract get trie(): Record<string, number>;
+  abstract get filtre(): Record<string, number>;
 }

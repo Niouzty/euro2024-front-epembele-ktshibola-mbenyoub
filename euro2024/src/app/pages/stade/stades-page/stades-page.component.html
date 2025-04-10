@@ -2,15 +2,14 @@
    
     <app-tableau-data
       [titre]="titre"
-      [objets]="stades"
+      [objets]="objets"
       [pageMax]="pageMax"
       (pageChange)="chargementPage($event)"
-      [fonctionTries]="fonctionTries"
       (changeValue)="changeValue($event)"
       (deleteRow)="deleteRow($event)"
     ></app-tableau-data>
 
-    <app-insert [table]="schema" (inserted)="onStadeInsert($event)"></app-insert>
+    <app-insert [table]="schema" (inserted)="onInsert($event)"></app-insert>
 
   </div>
   

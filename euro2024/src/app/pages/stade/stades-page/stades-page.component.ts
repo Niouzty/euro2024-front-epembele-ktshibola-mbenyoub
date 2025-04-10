@@ -8,6 +8,7 @@ import { StadesService } from '../../../core/services/stades.service';
 import { Stade, StadeBD } from '../../../models/Stade';
 import { Table } from '../../../models/Table';
 import { map } from 'rxjs';
+import { PageGestionData } from '../../PageGestionData';
 
 @Component({
   selector: 'app-stades-page',
@@ -22,122 +23,36 @@ import { map } from 'rxjs';
   styleUrls: ['./stades-page.component.scss'], 
 })
 
-export class StadesPageComponent implements OnInit {
-  titre: string = "Liste des Stades !";
-  stades: Stade[] = [];
-  taillePage: number = 10;
-  nombreTotalStades: number = 0;
-  schema!: Table;
-  pageActuelle: number = -1;
-
-  constructor(
-    private stadeService: StadesService,
-    private service: DatabaseService
-  ) {}
-
-  get fonctionTries(): Record<string, (values: Stade[]) => Stade[]>[] {
-    return [
-      {
-        "Capacité + > -": (values: Stade[]) => {
-          return values.sort((a, b) => b.capacite - a.capacite);
-        }
-      },
-      {
-        "Capacité - > +": (values: Stade[]) => {
-          return values.sort((a, b) => a.capacite - b.capacite);
-        }
-      }
-    ];
-  }
-
-  get pageMax(): number {
-    return Math.ceil(this.nombreTotalStades / this.taillePage);
+export class StadesPageComponent extends PageGestionData<StadeBD,Stade> implements OnInit {
+  
+  constructor(private serviceBD: DatabaseService, private stadeService: StadesService)
+  {
+    super("Stades",stadeService);
   }
 
   ngOnInit(): void {
-    
-    
-    this.stadeService.countRow().subscribe({
-      next: (nombre) => {
-        this.nombreTotalStades = nombre;
-      },
-      error: (err) => {
-        console.error('Erreur lors de la récupération du nombre total de stades :', err);
-      } 
+    this.serviceBD.getTable("stade").subscribe({
+      next: (table) => super.init(table)
     });
 
-    this.chargementPage(1);
-    
-    this.service.getTable('stade').subscribe({
-        next: (data) => this.schema = data
-    });
-    
   }
 
-  chargementPage(page: number): void {
-    this.pageActuelle = page;
-    this.stadeService.getAll(page, this.taillePage).subscribe({
-      next: (response) => {
-        if (response.length > 0) {
-          this.stades = response.map(this.convertData); 
-          console.log("donnée reçue");
-        } else {
-          console.log("donnée non reçue");
-          this.stades = [];
-        }
-        console.log(this.stades);
-      },
-      error: (err) => {
-        console.error('Erreur lors de la récupération des stades :', err);
-      }
-    });
+ 
+
+ 
+  
+
+
+  override get trie(): Record<string, number> {
+    throw new Error('Method not implemented.');
   }
-
-  onChangementDePage(page: number): void {
-    this.chargementPage(page);
+  override get filtre(): Record<string, number> {
+    throw new Error('Method not implemented.');
   }
+ 
 
-  changeValue(data: { column: string; id: number | string; newValue: number | string }) {
-    this.stadeService.update(data.column, +data.id, data.newValue).subscribe({
-      next: (res) => {
-        if (res) {
-          const index = this.stades.findIndex(s => s.id.value == data.id);
-          if (index === -1)
-             return;
 
-          const oldStade = this.stades[index];
-          const newStade = { ...oldStade, [data.column]: data.newValue };
-
-          this.stades.splice(index, 1, newStade);
-        }
-      },
-      error: (err) => {
-        console.error('Erreur lors de la mise à jour :', err);
-      }
-    });
-  }
-
-  onStadeInsert(data: Record<string, any>[]) {
-    const dataMap: StadeBD[] = data.map(item => ({
-      id_stade: item['id_stade'],
-      nom: String(item['nom']),
-      id_ville: Number(item['id_ville']),
-      capacite: Number(item['capacite'])
-    }));
-
-    this.stadeService.insert(dataMap).subscribe({
-      next: (res) => {
-        if (res) { 
-          this.stades.push(this.convertData(res));
-        }
-      },
-      error: (err) => {
-        console.error('Erreur lors de l\'insertion :', err);
-      }
-    });
-  }
-
-  convertData(stades: StadeBD): Stade {
+  override convertData(stades: StadeBD): Stade {
     return {
       id: {
         value: stades.id_stade,
@@ -149,18 +64,5 @@ export class StadesPageComponent implements OnInit {
     };
   }
 
-  deleteRow(id_stade: number | string): void {
-    this.stadeService.delete(+id_stade).subscribe({
-      next: (success) => {
-        if (success) {
-          alert('Suppression réussie !');
-        } else {
-          alert('Erreur lors de la suppression');
-        }
-      },
-      error: (error) => {
-        alert('Une erreur est survenue lors de la communication avec le serveur' + error);
-      }
-    });
-  }
+  
 }

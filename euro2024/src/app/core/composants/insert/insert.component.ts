@@ -9,12 +9,12 @@ import { Table } from '../../../models/Table';
   templateUrl: './insert.component.html',
   styleUrls: ['./insert.component.scss']
 })
-export class InsertComponent {
-  @Input({ required: true }) table!: Table;
-  @Output() inserted = new EventEmitter<Record<string, any>[]>(); 
+export class InsertComponent<T extends Record<string, any>> {
+  @Input() table!: Table;
+  @Output() inserted = new EventEmitter<T[]>(); 
 
-  inputValues: Record<string, any> = {}; 
-  listInput: Record<string, any>[] = [];
+  inputValues: T = {} as T; 
+  listInput: T[] = []; 
   updateRow: number = -1;
 
   get namesColumns(): string[] {
@@ -35,13 +35,16 @@ export class InsertComponent {
 
   submit(): void {
     if (this.isValid()) {
-      this.listInput.push({...this.inputValues}); 
+      this.listInput.push({ ...this.inputValues }); 
       this.resetForm();
     }
   }
 
   submitFinal(): void {
-    this.inserted.emit(this.listInput);
+    const confirmed = window.confirm('Êtes-vous sûr de vouloir valider ces inserts ?');
+    if (!confirmed) {
+      this.inserted.emit(this.listInput);
+    }
     this.listInput = [];
     this.resetForm();
   }
@@ -56,6 +59,6 @@ export class InsertComponent {
   }
 
   private resetForm(): void {
-    this.inputValues = {};
+    this.inputValues = {} as T; 
   }
 }

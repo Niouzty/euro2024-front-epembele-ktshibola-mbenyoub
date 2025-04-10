@@ -4,24 +4,39 @@
   <input 
     type="text" 
     [(ngModel)]="input" 
-    (ngModelChange)="updateFilteredValues()"
+    (ngModelChange)="(recherche())"
     placeholder="Rechercher..."
     class="search-bar"
   >
 
-  <div class="filters">
-    @for (trie of tries; track trie) {
+  <div class="tries">
+    @for (trie of triesK; track trie) {
       <label>
         <input
-          type="checkbox"
-          [checked]="trie_actif.includes(trie)"
-          (change)="toggleFiltre(trie)"
+          type="radio"
+          name="trie-options"
+          (change)="toggleTrie(trie)"
         />
         {{ trie }}
       </label>
     }
   </div>
-
+  
+  
+  <div class="filters">
+    @for (filtre of filtresK; track filtre) {
+      <label>
+        <input
+          type="checkbox"
+          (change)="toggleFiltre(filtre)"
+        />
+        {{ filtre }}
+      </label>
+    }
+  </div>
+  
+ 
+  
   @if (filteredValues.length > 0) {
     <table class="tableau">
       <thead>
