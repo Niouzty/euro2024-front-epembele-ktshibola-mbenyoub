@@ -20,7 +20,7 @@ export class JoueurPageComponent extends PageGestionData<JoueurBD,Joueur>
 {
   constructor(private serviceBD: DatabaseService, private serviceJ: JoueursService)
     {
-      super("Stades",serviceJ);
+      super("Joueurs",serviceJ);
     }
   
     ngOnInit(): void {

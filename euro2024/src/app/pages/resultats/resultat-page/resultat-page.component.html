@@ -1,0 +1,17 @@
+<div style="display: flex; flex-direction: column; align-items: center; width: 100%;">
+   
+    <app-tableau-data
+      [titre]="titre"
+      [objets]="objets"
+      [pageMax]="pageMax"
+      [filtres]="filtre"
+      [tries]="trie"
+      (pageChange)="chargementPage($event)"
+      (changeValue)="changeValue($event)"
+      (deleteRow)="deleteRow($event)"
+    ></app-tableau-data>
+  
+    <app-insert [table]="schema" (inserted)="onInsert($event)"></app-insert>
+  
+  </div>
+  
