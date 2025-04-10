@@ -90,7 +90,7 @@ export abstract class AbstractServiceCRUD<T> implements IService<T>{
     }
 
     countRow(): Observable<number> {
-        return this.http.get<{ result: number }>(this.getUrl() + "/nombres").pipe(
+        return this.http.get<{ result: number }>(this.getUrl() + "nombres").pipe(
             map(response => response.result),
             catchError(error => {
                 console.error('Erreur lors du comptage des lignes :', error);
