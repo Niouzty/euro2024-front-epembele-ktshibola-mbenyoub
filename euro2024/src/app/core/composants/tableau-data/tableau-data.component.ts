@@ -13,7 +13,9 @@ export class TableauDataComponent<T extends Record<string, any> & { id: {value :
   @Input({ required: true }) titre!: string;
   @Input({ required: true }) objets!: T[];
   @Input({ required: true }) pageMax!: number;
-  @Input() fonctionTries: Record<string, (values: T[]) => T[]>[] = [];
+  @Input() trie!: Record<string,string>;
+  @Input() filtre!: Record<string,string>;
+
 
   @Output() pageChange = new EventEmitter<number>();
   @Output() changeValue = new EventEmitter<{column : string,id: number | string, newValue : number | string }>();

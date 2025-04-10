@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { environment } from '../../../environments/environment';
 import { HttpClient } from '@angular/common/http';
-import { map, Observable } from 'rxjs';
+import { map, Observable, tap } from 'rxjs';
 import { Table } from '../../models/Table';
 
 @Injectable({
@@ -9,7 +9,7 @@ import { Table } from '../../models/Table';
 })
 
 export class DatabaseService {
-  private apiUrl = `${environment.apiUrl}/bdd`;
+  private apiUrl = `${environment.apiUrl}/database/`;
 
   constructor(private http: HttpClient) {} 
 
@@ -17,11 +17,15 @@ export class DatabaseService {
 
   getSchema() : Observable<Table[]>
   {
-    return this.http.get<Table[]>(this.apiUrl+'/schema');
+    return this.http.get<{result : Table[]}>(this.apiUrl).pipe(
+      map(r => r.result)
+    );
   }
 
-  getTable(table : string) : Observable<Table> {
-    return this.http.get<Table>(this.apiUrl+"/schema/"+table);
+  getTable(table: string): Observable<Table> {
+    return this.http.get<{ result: Table }>(this.apiUrl + table).pipe(
+      map(res => res.result)   
+  );
   }
-
+  
 }

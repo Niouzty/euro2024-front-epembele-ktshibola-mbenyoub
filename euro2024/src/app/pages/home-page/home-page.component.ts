@@ -22,6 +22,7 @@ export class HomePageComponent {
       next: (data) => {
         this.tables = data;
         console.log(this.tables);
+        console.log("gzgezggg");
       },
       error: (error) => {
         console.error('Erreur lors de la récupération du schéma :', error);

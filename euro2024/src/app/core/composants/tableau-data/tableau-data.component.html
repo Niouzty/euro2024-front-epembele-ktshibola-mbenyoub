@@ -33,7 +33,7 @@
       </thead>
       <tbody>
         @for (item of filteredValues; track $index) {
-          <tr (dblclick)="startEditing(item.id.value)" (mouseleave)="stopEditing()" (contextmenu)="onRightClick($event, item.id)">
+          <tr (dblclick)="startEditing(item.id.value)" (mouseleave)="stopEditing()" (contextmenu)="onRightClick($event, item.id.value)">
             @for (key of keys; track key) {
               <td>
                 @if (key === 'id') {

@@ -19,7 +19,7 @@ export class StadesService implements IService<StadeBD> {
     return this.http.post<any>(`${this.url}batch`, data);
   }
 
-  update(id: number, column: string, newValue: string): Observable<StadeBD> {
+  update(column: string, id: number, newValue: string | number): Observable<StadeBD> {
     const body = { 
       column: column,    
       value: newValue   
@@ -48,7 +48,7 @@ export class StadesService implements IService<StadeBD> {
     throw new Error('Method not implemented.');
   }
 
-  getNumberRow(): Observable<number> {
+  countRow(): Observable<number> {
     return this.http.get<{ result: number }>(this.url+"/nombres").pipe(
       map(response => response.result) 
     );

@@ -2,7 +2,7 @@
    <h2>{{table.table_name}}</h2>
     (
     @for (col of table.columns; track $index) {
-        <p>col</p>
+        <p>{{col}}</p>
         @if (!$last) {
             , 
         }
