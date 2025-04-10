@@ -15,6 +15,6 @@ export interface Joueur{
 
 
 export interface JoueurBD extends Omit<Joueur, 'id'> {
-    id_match: number;
+    id_joueur: number;
 }
   

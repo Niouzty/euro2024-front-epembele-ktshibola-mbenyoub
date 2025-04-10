@@ -1,7 +1,7 @@
 import { IService } from "../core/services/Iservice";
 import { Table } from "../models/Table";
 
-export abstract class PageGestionData<E, T extends Record<string, any> & { id: { value: number | string, url: string } }>   {
+export abstract class  PageGestionData<E, T extends Record<string, any> & { id: { value: number | string, url: string } }>   {
   titre: string = "";
   objets!: T[];
   nombreObjetTotal: number = 0;
@@ -129,6 +129,8 @@ export abstract class PageGestionData<E, T extends Record<string, any> & { id: {
       this.filtreActif.push(codeFiltre);
     }
 
+    this.actualiser();
+
   }
 
   toggleTrie(codeTrie: number): void {
@@ -137,6 +139,8 @@ export abstract class PageGestionData<E, T extends Record<string, any> & { id: {
     } else {
       this.trieActif = -1;
     }
+
+    this.actualiser();
 
   }
 

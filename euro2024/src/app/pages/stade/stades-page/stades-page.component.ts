@@ -50,7 +50,10 @@ export class StadesPageComponent extends PageGestionData<StadeBD,Stade> implemen
     }
   }
   override get filtre(): Record<string, number> {
-    return {}
+    return {
+      "Capcaité descroisant" : 1,
+      "Capacité croisant" : 2
+    }
   }
  
 
