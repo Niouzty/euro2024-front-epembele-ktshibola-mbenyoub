@@ -20,21 +20,10 @@ export abstract class PageGestionData<E, T extends Record<string, any> & { id: {
   init(schema: Table)
   {
     this.schema = schema;
-    this.chargeDonnee();
     this.actualiser();
   }
 
-  chargeDonnee(): void {
-    const savedTrieActif = localStorage.getItem('trieActif');
-    const savedFiltreActif = localStorage.getItem('filtreActif');
-
-    if (savedTrieActif) 
-      this.trieActif = JSON.parse(savedTrieActif);
-    
-    if (savedFiltreActif)
-      this.filtreActif = JSON.parse(savedFiltreActif);
-  }
-
+  
   actualiser(): void {
     this.service.countRow().subscribe({
       next: (nombre) => {
@@ -66,30 +55,41 @@ export abstract class PageGestionData<E, T extends Record<string, any> & { id: {
   }
 
   changeValue(data: { column: string; id: number | string; newValue: number | string }) {
-    this.service.update(data.column, +data.id, data.newValue).subscribe({
-      next: (res) => {
-        if (res) {
-          const index = this.objets.findIndex((obj) => obj.id.value == data.id);
-          if (index === -1) 
-            return;
-
-          const oldObject = this.objets[index];
-          const newObject = { ...oldObject, [data.column]: data.newValue };
-
-          this.objets.splice(index, 1, newObject);
+    const index = this.objets.findIndex((obj) => obj.id.value == data.id);
+    if (index === -1) {
+      return;
+    }
+  
+    const oldObject = this.objets[index];
+    const newObject = { ...oldObject, [data.column]: data.newValue };
+    const confirmationMessage = `Êtes-vous sûr de vouloir modifier la valeur suivante ?\n\nAvant : ${JSON.stringify(oldObject, null, 2)}\n\nAprès : ${JSON.stringify(newObject, null, 2)}`;
+    const valid = window.confirm(confirmationMessage);
+  
+    if (valid) {
+      this.service.update(data.column, +data.id, data.newValue).subscribe({
+        next: (res) => {
+          if (res) {
+            this.objets.splice(index, 1, newObject);
+            alert('Mise à jour réussie !');
+          }
+        },
+        error: (err) => {
+          console.error('Erreur lors de la mise à jour :', err);
+          alert('Erreur lors de la mise à jour');
         }
-      },
-      error: (err) => {
-        console.error('Erreur lors de la mise à jour :', err);
-      }
-    });
+      });
+    } else {
+      alert('Modification annulée');
+    }
   }
+  
 
   onInsert(data: E[]) {
+    console.log(data);
     this.service.insert(data).subscribe({
       next: (res) => {
         if (res) {
-          this.objets.push(this.convertData(res));
+          this.chargementPage(this.pageActuelle);
         }
       },
       error: (err) => {
@@ -99,19 +99,28 @@ export abstract class PageGestionData<E, T extends Record<string, any> & { id: {
   }
 
   deleteRow(id: number | string): void {
-    this.service.delete(+id).subscribe({
-      next: (success) => {
-        if (success) {
-          alert('Suppression réussie !');
-        } else {
-          alert('Erreur lors de la suppression');
+
+    const valid = window.confirm('Ëtes vous sur de vouloir supprimer ?')
+
+    if (valid)
+    {
+      this.service.delete(+id).subscribe({
+        next: (success) => {
+          if (success) {
+            this.chargementPage(this.pageActuelle); 
+            alert('Suppression réussie !');
+          } else {
+            alert('Erreur lors de la suppression');
+          }
+        },
+        error: (error) => {
+          alert('Une erreur est survenue lors de la communication avec le serveur : ' + error);
         }
-      },
-      error: (error) => {
-        alert('Une erreur est survenue lors de la communication avec le serveur : ' + error);
-      }
-    });
+      });
+    }
   }
+
+    
 
   toggleFiltre(codeFiltre: number): void {
     if (this.filtreActif.includes(codeFiltre)) {
@@ -120,7 +129,6 @@ export abstract class PageGestionData<E, T extends Record<string, any> & { id: {
       this.filtreActif.push(codeFiltre);
     }
 
-    localStorage.setItem('filtreActif',  JSON.stringify(this.filtreActif));
   }
 
   toggleTrie(codeTrie: number): void {
@@ -130,7 +138,6 @@ export abstract class PageGestionData<E, T extends Record<string, any> & { id: {
       this.trieActif = -1;
     }
 
-    localStorage.setItem('trieActif', String(this.trieActif));
   }
 
   abstract convertData(data: E): T;

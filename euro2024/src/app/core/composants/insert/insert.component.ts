@@ -18,7 +18,7 @@ export class InsertComponent<T extends Record<string, any>> {
   updateRow: number = -1;
 
   get namesColumns(): string[] {
-    return this.table.columns;
+    return this.table?.columns;
   }
 
   rowUpdate(i: number): void {
@@ -42,7 +42,7 @@ export class InsertComponent<T extends Record<string, any>> {
 
   submitFinal(): void {
     const confirmed = window.confirm('Êtes-vous sûr de vouloir valider ces inserts ?');
-    if (!confirmed) {
+    if (confirmed) {
       this.inserted.emit(this.listInput);
     }
     this.listInput = [];

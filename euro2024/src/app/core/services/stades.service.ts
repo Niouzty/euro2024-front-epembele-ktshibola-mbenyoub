@@ -16,6 +16,8 @@ export class StadesService implements IService<StadeBD> {
 
 
   insert(data: StadeBD[]): Observable<StadeBD> {
+    console.log(data);
+    console.log("fzfz");
     return this.http.post<any>(`${this.url}batch`, data);
   }
 
@@ -30,9 +32,14 @@ export class StadesService implements IService<StadeBD> {
 
   delete(id: number): Observable<boolean> {
     return this.http.delete<{result: boolean}>(this.url + id).pipe(
-      map(res => res.result)
+      map(res => res.result),  
+      catchError(error => {
+        console.error('Erreur lors de la suppression :', error);
+        return of(false);  
+      })
     );
   }
+  
 
   getAll(page: number, size: number): Observable<StadeBD[]> {
     return this.http.get<{ result: StadeBD[] }>(`${this.url}?offset=${page}&limit=${size}`).pipe(

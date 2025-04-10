@@ -44,10 +44,13 @@ export class StadesPageComponent extends PageGestionData<StadeBD,Stade> implemen
 
 
   override get trie(): Record<string, number> {
-    throw new Error('Method not implemented.');
+    return {
+      "Capcaité descroisant" : 1,
+      "Capacité croisant" : 2
+    }
   }
   override get filtre(): Record<string, number> {
-    throw new Error('Method not implemented.');
+    return {}
   }
  
 
