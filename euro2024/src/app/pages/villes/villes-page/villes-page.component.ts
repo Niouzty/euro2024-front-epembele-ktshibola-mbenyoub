@@ -20,7 +20,7 @@ export class VillesPageComponent extends PageGestionData<VilleBD,Ville>{
   }
   
   ngOnInit(): void {
-    this.serviceBD.getTable("villes").subscribe({
+    this.serviceBD.getTable("ville").subscribe({
       next: (table) => super.init(table)
     });
   }

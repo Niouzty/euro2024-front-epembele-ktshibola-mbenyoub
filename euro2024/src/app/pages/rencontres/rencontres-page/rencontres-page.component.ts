@@ -17,7 +17,7 @@ export class RencontresPageComponent extends PageGestionData<RencontreBD,Rencont
 
   constructor(private serviceBD: DatabaseService, private serviceR: RencontreService)
   {
-    super("Arbitres",serviceR);
+    super("Rencontres",serviceR);
   }
   
   ngOnInit(): void {

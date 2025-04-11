@@ -12,7 +12,7 @@ export class NationaliteService extends AbstractServiceCRUD<NationaliteBD>{
     super(http);
   }
   
-  url = "http://127.0.0.1:5000/villes/";
+  url = "http://127.0.0.1:5000/nationalites/";
 
   protected override getUrl(): string {
     return this.url;

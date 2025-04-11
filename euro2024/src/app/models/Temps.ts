@@ -3,7 +3,7 @@ export interface Temps {
         value: number,
         url: string
     },
-    minute: number;
+    date_heure_match: Date;
 }
 
 

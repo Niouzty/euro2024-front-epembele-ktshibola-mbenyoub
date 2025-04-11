@@ -42,7 +42,7 @@ export class TempsPageComponent extends PageGestionData<TempsBD,Temps>{
             value: t.id_temps,
             url: "temps/" + t.id_temps,
           },
-          minute: t.minute,
+          date_heure_match: t.date_heure_match,
         };
       }
 }

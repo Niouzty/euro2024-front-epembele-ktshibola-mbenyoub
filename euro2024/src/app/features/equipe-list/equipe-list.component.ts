@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { EquipesService } from '../../core/services/equipes.service';
-import { Equipe } from '../../models/equipe.model';
+import { Equipe, EquipeBD } from '../../models/equipe.model';
 import { TableauDataComponent } from '../../shared/components/tableau-data/tableau-data.component';
 import { CommonModule } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
@@ -13,7 +13,7 @@ import { RouterModule } from '@angular/router';
   templateUrl: './equipe-list.component.html',
 })
 export class EquipeListComponent implements OnInit {
-  equipes: Equipe[] = [];
+  equipes: EquipeBD[] = [];
   isLoading = true;
   errorMessage = '';
 
@@ -25,7 +25,7 @@ export class EquipeListComponent implements OnInit {
 
   loadEquipes(): void {
     this.isLoading = true;
-    this.equipesService.getEquipes().subscribe({
+    this.equipesService.getAll(1,100,0,[]).subscribe({
       next: (data) => {
         this.equipes = Array.isArray(data) ? data : [data];
         this.isLoading = false;
@@ -39,7 +39,7 @@ export class EquipeListComponent implements OnInit {
 
   onDelete(id: number): void {
     if (confirm('Êtes-vous sûr de vouloir supprimer cette équipe ?')) {
-      this.equipesService.deleteEquipe(id).subscribe({
+      this.equipesService.delete(id).subscribe({
         next: () => {
           this.equipes = this.equipes.filter(e => e.id_equipe !== id);
           this.errorMessage = '';

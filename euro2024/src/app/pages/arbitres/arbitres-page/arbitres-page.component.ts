@@ -20,7 +20,7 @@ export class ArbitresPageComponent extends PageGestionData<ArbitreBD,Arbitre> {
     }
     
     ngOnInit(): void {
-      this.serviceBD.getTable("arbitres").subscribe({
+      this.serviceBD.getTable("arbitre").subscribe({
         next: (table) => super.init(table)
       });
     }

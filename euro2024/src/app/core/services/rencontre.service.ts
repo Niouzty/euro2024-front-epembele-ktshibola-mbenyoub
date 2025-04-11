@@ -18,3 +18,4 @@ export class RencontreService extends AbstractServiceCRUD<RencontreBD>{
     return this.url;
   }
 }
+ 

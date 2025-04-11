@@ -42,7 +42,7 @@ export class PostesPageComponent extends PageGestionData<PosteBD,Poste> {
             value: data.id_poste,
             url: "/postes/"+data.id_poste,
           },
-          nom: data.nom
+          nom_poste: data.nom_poste
         }
       }
     

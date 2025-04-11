@@ -41,7 +41,7 @@ export class NationalitePageComponent extends PageGestionData<NationaliteBD,Nati
         return {
           id: {
             value: nat.id_nationalite,
-            url: "nationalitees/" + nat.id_nationalite,
+            url: "nationalites/" + nat.id_nationalite,
           },
           nom: nat.nom,
         };

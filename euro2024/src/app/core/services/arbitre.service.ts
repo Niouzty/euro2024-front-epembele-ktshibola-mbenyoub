@@ -10,7 +10,7 @@ import { AbstractServiceCRUD } from './AbstractServiceCRUD';
   providedIn: 'root'
 })
 export class ArbitreService extends AbstractServiceCRUD<ArbitreBD>{
-  private apiUrl = `${environment.apiUrl}/arbitres`;
+  private apiUrl = `${environment.apiUrl}/arbitres/`;
 
   constructor(http: HttpClient) {
     super(http);

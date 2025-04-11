@@ -3,7 +3,7 @@ export interface Poste {
         value: number,
         url: string
     },
-    nom: string;
+    nom_poste: string;
   }
 
   
