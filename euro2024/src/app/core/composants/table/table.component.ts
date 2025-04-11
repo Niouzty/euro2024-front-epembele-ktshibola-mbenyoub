@@ -14,6 +14,6 @@ export class TableComponent {
   constructor(private router: Router) {}
 
   navigateToTable() {
-    this.router.navigate([`/${this.table.table_name}+s`]);
+    this.router.navigate([`/${this.table.table_name}s`]);
   }
 }
