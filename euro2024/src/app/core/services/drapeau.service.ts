@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { AbstractServiceCRUD } from './AbstractServiceCRUD';
 import { HttpClient } from '@angular/common/http';
-import { Drapeau, DrapeauBD } from '../../models/Drapeaux';
+import { Drapeau, DrapeauBD } from '../../models/drapeaux.model';
 
 @Injectable({
   providedIn: 'root'

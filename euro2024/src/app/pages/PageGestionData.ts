@@ -1,5 +1,5 @@
 import { IService } from "../core/services/Iservice";
-import { Table } from "../models/Table";
+import { Table } from "../models/table.model";
 
 export abstract class  PageGestionData<E, T extends Record<string, any> & { id: { value: number | string, url: string } }>   {
   titre: string = "";

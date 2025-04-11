@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { AbstractServiceCRUD } from './AbstractServiceCRUD';
-import { TempsBD } from '../../models/Temps';
+import { TempsBD } from '../../models/temps.model';
 import { HttpClient } from '@angular/common/http';
 
 @Injectable({

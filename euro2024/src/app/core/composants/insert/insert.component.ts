@@ -1,6 +1,6 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { Table } from '../../../models/Table';
+import { Table } from '../../../models/table.model';
 
 @Component({
   selector: 'app-insert',

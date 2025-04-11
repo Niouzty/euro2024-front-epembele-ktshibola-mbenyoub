@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { DatabaseService } from '../../../core/services/database.service';
 import { DrapeauService } from '../../../core/services/drapeau.service';
 import { PageGestionData } from '../../PageGestionData';
-import { Drapeau, DrapeauBD } from '../../../models/Drapeaux';
+import { Drapeau, DrapeauBD } from '../../../models/drapeaux.model';
 import { TableauDataComponent } from "../../../core/composants/tableau-data/tableau-data.component";
 import { InsertComponent } from "../../../core/composants/insert/insert.component";
 

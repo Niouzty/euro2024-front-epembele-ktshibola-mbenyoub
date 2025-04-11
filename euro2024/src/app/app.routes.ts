@@ -1,9 +1,6 @@
 import { Routes } from '@angular/router';
-import {TableListComponent} from './features/table-list/table-list.component';
-import { HomeComponent } from './features/home/home.component';
-import {EquipeListComponent} from './features/equipe-list/equipe-list.component';
-import { TopButeursComponent } from './features/top-buteurs/top-buteurs.component'; 
-
+import { TopButeursComponent } from './pages/top-buteurs/top-buteurs.component'; 
+import { ArbitrePerformanceComponent } from './pages/arbitre-performance/arbitre-performance.component';
 import { StadesPageComponent } from './pages/stade/stades-page/stades-page.component';
 import { HomePageComponent } from './pages/home-page/home-page.component';
 import { NotFoundPageComponent } from './pages/not-found-page/not-found-page.component';
@@ -16,6 +13,7 @@ import { ResultatPageComponent } from './pages/resultats/resultat-page/resultat-
 import { TempsPageComponent } from './pages/temps/temps-page/temps-page.component';
 import { PostesPageComponent } from './pages/postes/postes-page/postes-page.component';
 import { DrapeauxPageComponent } from './pages/drapeaux/drapeaux-page/drapeaux-page.component';
+import { ComparaisonEquipesComponent } from './pages/comparaison-equipes/comparaison-equipes.component';
 
 export const routes: Routes = [
     {path: '',component: HomePageComponent},
@@ -29,7 +27,8 @@ export const routes: Routes = [
     {path: 'arbitres', component: ArbitresPageComponent},
     {path: 'villes',component: VillesPageComponent},
     {path: 'nationalites',component: NationalitePageComponent},
-    {path:'equipe-list', component: EquipeListComponent},
     {path:'top-buteurs', component: TopButeursComponent},
+    {path:'comparaison-equipes', component: ComparaisonEquipesComponent},
+    {path:'arbitre-performances', component: ArbitrePerformanceComponent},
     {path:'**',component: NotFoundPageComponent}
 ];

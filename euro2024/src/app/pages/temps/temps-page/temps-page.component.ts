@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { PageGestionData } from '../../PageGestionData';
-import { Temps, TempsBD } from '../../../models/Temps';
+import { Temps, TempsBD } from '../../../models/temps.model';
 import { DatabaseService } from '../../../core/services/database.service';
 import { TempsService } from '../../../core/services/temps.service';
 import { TableauDataComponent } from "../../../core/composants/tableau-data/tableau-data.component";

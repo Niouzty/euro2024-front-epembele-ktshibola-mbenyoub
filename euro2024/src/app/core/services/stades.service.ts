@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { catchError, map, Observable, of, tap } from 'rxjs';
-import { Stade, StadeBD } from '../../models/Stade';
+import { Stade, StadeBD } from '../../models/stade.model';
 import { IService } from './Iservice';
 import { AbstractServiceCRUD } from './AbstractServiceCRUD';
 

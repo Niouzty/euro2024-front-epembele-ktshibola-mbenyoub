@@ -5,8 +5,8 @@ import { InsertComponent } from '../../../core/composants/insert/insert.componen
 import { TableauDataComponent } from '../../../core/composants/tableau-data/tableau-data.component';
 import { DatabaseService } from '../../../core/services/database.service';
 import { StadesService } from '../../../core/services/stades.service';
-import { Stade, StadeBD } from '../../../models/Stade';
-import { Table } from '../../../models/Table';
+import { Stade, StadeBD } from '../../../models/stade.model';
+import { Table } from '../../../models/table.model';
 import { map } from 'rxjs';
 import { PageGestionData } from '../../PageGestionData';
 

@@ -21,7 +21,7 @@ export class ArbitreService extends AbstractServiceCRUD<ArbitreBD>{
   }
 
   get_all_result(): Observable<ArbitreWithResult[]>{
-    return this.http.get<ArbitreWithResult[]>(`${this.apiUrl}/arbitres-result`);
+    return this.http.get<ArbitreWithResult[]>(`${this.apiUrl}arbitres-result`);
   }
 
   get_all_arbitres(): Observable<Arbitre[]>{

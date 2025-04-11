@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { TableauDataComponent } from "../../../core/composants/tableau-data/tableau-data.component";
 import { InsertComponent } from "../../../core/composants/insert/insert.component";
 import { PageGestionData } from '../../PageGestionData';
-import { Ville, VilleBD } from '../../../models/Villes';
+import { Ville, VilleBD } from '../../../models/villes.model';
 import { DatabaseService } from '../../../core/services/database.service';
 import { VilleService } from '../../../core/services/ville.service';
 

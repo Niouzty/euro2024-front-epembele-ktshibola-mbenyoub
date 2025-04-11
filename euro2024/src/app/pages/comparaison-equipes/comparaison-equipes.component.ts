@@ -37,7 +37,7 @@ export class ComparaisonEquipesComponent {
   }
 
   loadEquipes(): void {
-    this.equipesService.getEquipes().subscribe({
+    this.equipesService.getEquipesCompare().subscribe({
       next: (data) => {
         this.equipes = Array.isArray(data) ? data : [data];
       },
@@ -62,24 +62,42 @@ export class ComparaisonEquipesComponent {
   }
 
   compareTeams(): void {
-    if (!this.equipe1 || !this.equipe2) {
-      this.errorMessage = 'Veuillez sélectionner deux équipes';
-      return;
+    console.log('Équipe 1:', this.equipe1);
+    console.log('Équipe 2:', this.equipe2);
+
+    if (!this.equipe1?.id_equipe || !this.equipe2?.id_equipe) {
+        this.errorMessage = 'Veuillez sélectionner deux équipes valides';
+        console.error('IDs manquants:', {
+            equipe1: this.equipe1?.id_equipe,
+            equipe2: this.equipe2?.id_equipe
+        });
+        return;
+    }
+
+    if (this.equipe1.id_equipe === this.equipe2.id_equipe) {
+        this.errorMessage = 'Veuillez sélectionner deux équipes différentes';
+        return;
     }
 
     this.isLoading = true;
     this.errorMessage = '';
 
     this.equipesService.compareTeams(this.equipe1.id_equipe, this.equipe2.id_equipe).subscribe({
-      next: (data) => {
-        
-        this.resultats = data;
-        this.isLoading = false;
-      },
-      error: (err) => {
-        this.errorMessage = 'Erreur lors de la comparaison';
-        this.isLoading = false;
-      }
+        next: (data) => {
+            console.log('Réponse réussie:', data);
+            this.resultats = data;
+            this.isLoading = false;
+        },
+        error: (err) => {
+            console.error('Erreur complète:', err);
+            this.errorMessage = `Erreur technique: ${err.message || 'Veuillez réessayer'}`;
+            this.isLoading = false;
+            
+            // Pour débogage - à retirer en production
+            if (err.error) {
+                console.error('Détails erreur:', err.error);
+            }
+        }
     });
-  }
+}
 }

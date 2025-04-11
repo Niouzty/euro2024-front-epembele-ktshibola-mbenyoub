@@ -1,12 +1,12 @@
 import { Component } from '@angular/core';
-import { Table } from '../../../models/Table';
+import { Table } from '../../../models/table.model';
 import { DatabaseService } from '../../../core/services/database.service';
 import { JoueursService } from '../../../core/services/joueurs.service';
 import { TableauDataComponent } from "../../../core/composants/tableau-data/tableau-data.component";
 import { InsertComponent } from "../../../core/composants/insert/insert.component";
 import { Joueur, JoueurBD } from '../../../models/joueur.model';
 import { PageGestionData } from '../../PageGestionData';
-import { Rencontre, RencontreBD } from '../../../models/Rencontre';
+import { Rencontre, RencontreBD } from '../../../models/rencontre.model';
 import { StadesService } from '../../../core/services/stades.service';
 import { RencontreService } from '../../../core/services/rencontre.service';
 

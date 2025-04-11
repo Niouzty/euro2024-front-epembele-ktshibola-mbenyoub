@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { PageGestionData } from '../../PageGestionData';
-import { Rencontre, RencontreBD } from '../../../models/Rencontre';
+import { Rencontre, RencontreBD } from '../../../models/rencontre.model';
 import { DatabaseService } from '../../../core/services/database.service';
 import { RencontreService } from '../../../core/services/rencontre.service';
 import { TableauDataComponent } from '../../../core/composants/tableau-data/tableau-data.component';

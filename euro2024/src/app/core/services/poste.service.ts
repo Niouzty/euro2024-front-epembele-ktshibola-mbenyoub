@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { AbstractServiceCRUD } from './AbstractServiceCRUD';
-import { Poste, PosteBD } from '../../models/Poste';
+import { Poste, PosteBD } from '../../models/poste.model';
 import { HttpClient } from '@angular/common/http';
 
 @Injectable({

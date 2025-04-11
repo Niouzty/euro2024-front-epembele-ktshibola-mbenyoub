@@ -1,11 +1,16 @@
-<div class="table-container">
-   <h2>{{table.table_name}}</h2>
-    (
+<div 
+  class="p-4 border border-gray-200 rounded-lg shadow-sm hover:bg-gray-50 transition-colors cursor-pointer"
+  (click)="navigateToTable()"
+>
+  <h2 class="text-lg font-medium text-gray-800 mb-1">{{table.table_name}}</h2>
+  <div class="flex flex-wrap items-center text-sm text-gray-500">
     @for (col of table.columns; track $index) {
-        <p>{{col}}</p>
+      <span class="inline-flex items-center">
+        {{col}}
         @if (!$last) {
-            , 
+          <span class="mx-1">,</span>
         }
+      </span>
     }
-    )
+  </div>
 </div>

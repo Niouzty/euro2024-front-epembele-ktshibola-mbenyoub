@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { PageGestionData } from '../../PageGestionData';
-import { Resultat, ResultatBD } from '../../../models/Resultat';
+import { Resultat, ResultatBD } from '../../../models/resultat.model';
 import { ResultatService } from '../../../core/services/resultat.service';
 import { DatabaseService } from '../../../core/services/database.service';
 import { InsertComponent } from "../../../core/composants/insert/insert.component";

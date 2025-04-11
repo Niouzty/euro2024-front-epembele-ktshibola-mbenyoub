@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { Table } from '../../models/Table';
+import { Table } from '../../models/table.model';
 import { DatabaseService } from '../../core/services/database.service';
 import { TableComponent } from "../../core/composants/table/table.component";
 import { log } from 'console';

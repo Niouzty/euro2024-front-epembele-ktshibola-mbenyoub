@@ -1,6 +1,6 @@
 import { Component, Input } from '@angular/core';
-import { Table } from '../../../models/Table';
-import { log } from 'console';
+import { Table } from '../../../models/table.model';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-table',
@@ -8,42 +8,12 @@ import { log } from 'console';
   styleUrls: ['./table.component.scss']
 })
 export class TableComponent {
+  @Input({ required: false }) nom!: string;
+  @Input({ required: true }) table!: Table;
 
-  @Input({ required: false })
-  nom!: string;
+  constructor(private router: Router) {}
 
-  @Input({ required: true })
-  table!: Table;
-
-  /*
-  
-  getUrl(column: Column): string {
-    return column.isFK ? `https://example.com/${column.nom}` : '';
+  navigateToTable() {
+    this.router.navigate([`/${this.table.table_name}+s`]);
   }
-
-  createBalise(column: Column): string {
-    return column.isFK ? this.createBaliseFK(column) : this.createSBalise(column);
-  }
-
-  private createBaliseFK(column: Column): string {
-    const url = this.getUrl(column);
-    return `<a class='${this.getCssClass(column)}' href='${url}'>${column.nom}</a>`;
-  }
-
-  private createSBalise(column: Column): string {
-  
-    console.log(column);
-    return `<p class='${this.getCssClass(column)}'>${column.nom}</p>`;
-  }
-
-  private getCssClass(column: Column): string {
-    let classes = "column-field"; // Style de base pour tous les champs
-
-    if (column.isPK) {
-        classes += " pk-field"; // Ajoute le style PK (soulignement rouge)
-    }
-
-    return classes.trim(); // Retire les espaces inutiles
-  }
-  */
 }

@@ -4,7 +4,7 @@ import { InsertComponent } from "../../../core/composants/insert/insert.componen
 import { DatabaseService } from '../../../core/services/database.service';
 import { PosteService } from '../../../core/services/poste.service';
 import { PageGestionData } from '../../PageGestionData';
-import { Poste, PosteBD } from '../../../models/Poste';
+import { Poste, PosteBD } from '../../../models/poste.model';
 
 @Component({
   selector: 'app-postes-page',
